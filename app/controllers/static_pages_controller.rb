@@ -43,6 +43,8 @@ class StaticPagesController < ApplicationController
               marker.infowindow event.desc
               end
            end
+
+              #Determine which image to use for the gmaps markers
              if event.cat =='view'
                url='https://cdn2.iconfinder.com/data/icons/simplus-media/165/Layer_15-01-32.png'
              elsif event.cat =='tournament'

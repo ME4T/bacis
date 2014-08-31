@@ -5,6 +5,7 @@ Khoa::Application.routes.draw do
     namespace :mercury do
       resources :images
     end
+  devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
 
   mount Mercury::Engine => '/'
 
@@ -17,32 +18,24 @@ Khoa::Application.routes.draw do
   resources :events
   mount Mercury::Engine => '/'
 
-
   resources :events do
     member { put :mercury_update }
     end
   match '/auth/:provider/callback' => 'authentications#create'
 
-  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"},
-                       controllers: {omniauth_callbacks: "authentications", registrations: "registrations"}
- 
+
+
   root to: 'static_pages#home' 
   
   
   match '/myevents', to: 'events#myevent'
-  match '/users/:id', to: 'users#show'
-  match '/allusers', to: 'users#index'
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
   match '/listevents', to: 'events#list'
   match '/calevents', to: 'events#cal'
   
-  resources :users do
-    member do
-      get :borrows, :lends
-    end
-  end
+
 
   get "static_pages/home"
   get "static_pages/about"

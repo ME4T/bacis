@@ -1,83 +1,131 @@
-
-<% if current_user.id != nil %>
-<div class='hero-unit'>
-	 
-	<h1>New event</h1>
-
-<%= form_for(@event) do |f| %>
-
-  
-  <%= f.hidden_field :maker, :value => current_user.id %>
-
-  <div class="field">
-    <%= f.label :title , 'Title'%><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :dayof, "Date of Event"%><br />
-    <%= f.date_select :dayof %>
-  </div>  
- Event Type 
-    <%= f.radio_button    :cat, :value =>'tournament'%>  <%= f.label :cat,'Tournament' , :value => 'tournament' %>
-  <%= f.radio_button    :cat, :value =>'view'%>  <%= f.label :cat,'View Party' , :value => 'view'%>
-    <%= f.radio_button    :cat, :value =>'con/pax'%>  <%= f.label :cat,'Pax or Con' , :value => 'con/pax'%>
-  <%= f.radio_button    :cat, :value =>'other'%>  <%= f.label :cat,'Other' , :value => 'other'%>  
-  
-  	 
-  
-  <br />
-  <br />
-  <div class="field">
-    <%= f.label :start %><br /> 
-     <%= f.time_select :start ,
-  :default => Time.now.change(:hour => 11 )
-%>
-  </div>
-   <div class="field">
-<%= f.label :address, "Address "%> street, city, state or street, zip code
-</div>
-<br />
-  <div class="field">
-<%= f.text_field :address %>
-</div>
-<div class="field">
-	<%= f.check_box :isOnline%>
-</div>
-  <div class="field">
-<%= f.label :website , ' Website or link'%>
-</div>
-<br />
-  <div class="field">
-<%= f.text_field :website %>
-</div>
-<br />
-  <div class="field">
-<%= f.label :cost, 'Cost:'%>
-</div>
-<br />
-  <div class="field">
-<%= f.text_field  :cost , :value => '0'%>
-</div>
-<br />  <div class="field">
-  <div class="field">Supports html mark up
-<%= f.label :desc, "Description"%>
-<%= f.text_area :desc%>
-</div>
-</div>
-  <div class="actions">
-    <%= f.submit ' create new submit' ,   class: "btn btn-large btn-primary" %>
-  </div>
-<% end %>
+<div class='container hero-unit'>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2">
+            <h1>Create an Event</h1>
+        </div>
 
 
-<%= link_to 'Back', events_path %> 
-	
-	 
-  
- 
-	</div>
-<% else %>
+        <% if current_user != nil %>
+            <div class="col-md-12">
 
-Sign in to make an event please
+                <%= form_for(@event, :html => {:class => "new_event form-horizontal", :role => "form"}) do |f| %>
 
-<% end %>
+
+                    <%= f.hidden_field :maker, :value => current_user.id %>
+
+                    <div class="form-group">
+                        <%= f.label :title, class: "control-label col-md-2" %>
+                        <div class="col-md-6">
+                            <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <%= f.label :dayof, "Date of Event", class: "control-label col-md-2" %>
+                        <div class="col-md-3">
+                            <%= f.date_select :dayof, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control col-md-3'}  %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <%= f.label :start, class: "control-label col-md-2" %>
+                        <div class="time-select col-md-3">
+                            <%= f.time_select(:start, {:minute_step => 15}) %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <%= f.label :type, class: "control-label col-md-2" %>
+                        <div class="col-md-10">
+                            <div class="radio">
+                                <%= f.radio_button    :cat, :value =>'tournament'%>  
+                                <%= f.label :cat,'Tournament' , :value => 'tournament' %>
+                            </div>
+                            <div class="radio">
+                                <%= f.radio_button    :cat, :value =>'view'%>  
+                                <%= f.label :cat,'View Party' , :value => 'view' %>
+                            </div>
+                            <div class="radio">
+                                <%= f.radio_button    :cat, :value =>'con/pax'%>  
+                                <%= f.label :cat,'Pax or Con' , :value => 'con/pax' %>
+                            </div>
+                            <div class="radio">
+                                <%= f.radio_button    :cat, :value =>'other'%>  
+                                <%= f.label :cat,'Other' , :value => 'other' %>  
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <%= f.label :isOnline, "Online Only", class: "control-label col-md-2" %>
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <%= f.check_box :isOnline %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <%= f.label :website, "Website URL", class: "control-label col-md-2" %>
+                        <div class="col-md-6">
+                            <%= f.text_field :website, class: "form-control", placeholder: "Website URL" %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <%= f.label :address, "Location", class: "control-label col-md-2" %>
+                        <div class="col-md-6">
+                            <%= f.text_field :address, class: "form-control", placeholder: "street, city, state or street, zip code" %>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <%= f.label :cost, "Cost", class: "control-label col-md-2" %>
+                        <div class="col-md-6">
+                            <%= f.text_field :cost, :value => '0', class: "form-control", placeholder: "0" %>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <%= f.label :desc, "Description<br/>Supports HTML markup".html_safe, class: "control-label col-md-2" %>
+                        <div class="col-md-6">
+                            <%= f.text_area :desc, class: "form-control" %>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
+                            <%= f.submit 'Create Event' ,   class: "btn btn-large btn-primary" %>
+                        </div>
+                    </div>
+
+                    
+
+
+                <% end %>
+
+
+            </div>
+
+        <% else %>
+
+            <div class="col-md-10 col-md-offset-2">
+                <p>You must <%= link_to "sign in", new_user_session_path %> to create an event.</p>
+            </div>
+
+        <% end %>
+
+    </div>
+</div>
+
+
+
+

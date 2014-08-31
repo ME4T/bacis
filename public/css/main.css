@@ -1,0 +1,146 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body{
+	background:#020611;
+	color:white;
+	background:url(../img/common/fancy_background.jpg) 0px 100px;
+	font-family: 'Lato', sans-serif;
+	font-weight:bold;
+}
+
+
+
+h1{
+	font-family: 'Titillium Web', sans-serif;
+	font-weight:700;
+	color:#A5B0FF;
+	margin-bottom:20px;
+}
+h2{
+	font-family: 'Titillium Web', sans-serif;
+	font-weight:700;
+	color:#A5B0FF;
+}
+h3{
+	font-family: 'Titillium Web', sans-serif;
+	font-weight:700;
+}
+
+a{
+	color:#DF9860;
+}
+a:hover{
+	color:#EBC2A2;
+}
+.navbar{
+	margin-bottom:0;
+}
+.navbar-inverse{
+	background:#020406;
+}
+
+.navbar-collapse{
+
+}
+.navbar-brand{
+	height:auto;
+	float:none;
+	display:block;
+	margin:0;
+}
+.navbar-nav{
+	margin:0;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+margin:0;
+}
+.navbar-form{
+	margin:25px 0;
+}
+
+
+.navbar-right{
+	margin-top:10px;
+}
+.navbar-right li a{
+	color:white;
+}
+.navbar-right .social a{
+	overflow:hidden;
+	width:18px;
+	display:block;
+}
+.navbar-right li{
+	list-style:none;
+	float:left;
+	padding-right:10px;
+
+}
+.navbar-right li img{
+	width:100%;
+	margin-right:5px;
+}
+
+
+#the_map{
+	width:100%;
+	height:600px;
+	margin-top:20px;
+}
+
+
+.hero-unit{
+	padding-bottom:20px;
+	margin-top:20px;
+	background:rgba(0,0,0,.7);
+	min-height:200px;
+}
+.content{
+}
+
+
+
+.box{
+}
+
+
+.registration{
+
+
+}
+.registration .btn-primary{
+	margin-bottom:20px;
+	margin-top:10px;
+}
+.registration label{
+	font-size:20px;
+}
+.registration .form-group{
+	margin-bottom:10px;
+}
+
+
+
+
+
+
+.time-select select{
+height: 34px;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+color: #555;
+background-color: #FFF;
+background-image: none;
+border: 1px solid #CCC;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}

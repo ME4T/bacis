@@ -1,18 +1,24 @@
-<div class="hero-unit">
-	<% @events.each do |event|%>
+
+<div class='container hero-unit'>
+	<h1>My Events</h1>
+    <% if current_user != nil %>
+
+		<% @events.each do |event|%>
+		
+			<% if event.maker.to_s == current_user.id.to_s%>
+				<%= link_to  event.title, event%>: <%= event.dayof %>
+			<br />
+			<% end%>
+		
+		
+		<% end %>
+	<% else %>
+		<p>You must <%= link_to "sign in", new_user_session_path %> to create an event.</p>
+	<% end %>
 	
-		<% if event.maker.to_s == current_user.id.to_s%>
-			<%= link_to  event.title, event%>: <%= event.dayof %>
-		<br />
-		<% end%>
-	
-	
-	<% end%>
 	
 	
 	
 	
 	
-	
-	
-	</div>
+</div>

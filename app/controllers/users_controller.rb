@@ -3,8 +3,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @friends = User.find(params[:id]).friends
-    @transactions = User.find(params[:id]).transactions.paginate(page: params[:page], per_page: 10)
+    if @user != nil
+      @friends = @user.friends
+      @transactions = @user.transactions.paginate(page: params[:page], per_page: 10)
+    end
   end
   
   def index
@@ -27,8 +29,22 @@ class UsersController < ApplicationController
       @transactions = User.find(params[:id]).transactions.where(:t_type => 1).paginate(page: params[:page], per_page: 5)
      render 'borrows'
   end
- 
-  
+  def edit 
+    @user=User.find(params[:id])
+  end
+  def update 
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: 'user was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   
 end
   

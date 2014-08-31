@@ -1,13 +1,14 @@
 class EventsController < ApplicationController
-      def mercury_update
-  post = Event.find(params[:id])
-  # Update page
-  post.title=params[:content][:page_topic][:value]
-  post.desc= params[:content][:page_body][:value] 
-  post.address=params[:content][:page_address][:value] 
-  post.save!
-  render :json => {:url => post_path(post)}
-  end
+    def mercury_update
+      post = Event.find(params[:id])
+      # Update page
+      post.title=params[:content][:page_topic][:value]
+      post.desc= params[:content][:page_body][:value] 
+      post.address=params[:content][:page_address][:value] 
+      post.save!
+      render :json => {:url => post_path(post)}
+    end
+    
     def destroy
     @event = Event.find(params[:id])
     @event.destroy
@@ -28,7 +29,10 @@ class EventsController < ApplicationController
   def new
       @event = Event.new 
     
-        
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @event }
+      end 
  
   end
  

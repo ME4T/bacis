@@ -1,77 +1,77 @@
-<div class="hero-unit">
-<p id="notice"><%= notice %></p>
-<script>
-   jQuery(window).on('mercury:ready', function() { Mercury.saveUrl = '/events/' + <%= @event.id %> + "/mercury_update"; });
-</script>
-<p>
-   
-  <h1>  
-      <div class="content">
-  <div id="page_topic" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
- <%= raw  @event.title %>
-  
-  </div>
-  </div> </h1>
-  <h2>Type of event: <%= @event.cat%></h2>
-</p>
+<div class="container hero-unit">
+	<p id="notice"><%= notice %></p>
+	<script>
+	   jQuery(window).on('mercury:ready', function() { Mercury.saveUrl = '/events/' + <%= @event.id %> + "/mercury_update"; });
+	</script>
+	<p>
+	   
+	  <h1>  
+	      <div class="content">
+	  <div id="page_topic" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
+	 <%= raw  @event.title %>
+	  
+	  </div>
+	  </div> </h1>
+	  <h2>Type of event: <%= @event.cat%></h2>
+	</p>
 
-<p>
-  <b>Date:</b>
-   
-  <%= @event.dayof.month %>/<%= @event.dayof.day%>/<%= @event.dayof.year%> 
-</p>
-<p>
-  <b>Start:</b>
-       
-    	<% if @event.start.hour > 12 %>
-		 			<%= @event.start.hour - 12 %>:
-			
-				<% if @event.start.min == 0 %>
-				  	00 PM
-				<% else %>
-				<% if @event.start.min>9%>
-					<%= @event.start.min %> PM
-					
-					<% else %>
-					0<%= @event.start.min %> PM
-					<% end %>
-				<% end %>
-			
-			
-		<%else%>
-		 
-			<%= @event.start.hour %>:
-				<% if @event.start.min ==0 %>
-				  	00 AM
-				<% else %>
-					<% if @event.start.min>9%>
-					<%= @event.start.min %> AM
-					
-					<% else%>
-					0<%= @event.start.min %> AM
-					<% end %>
-				<% end %>
-					
+	<p>
+	  <b>Date:</b>
+	   
+	  <%= @event.dayof.month %>/<%= @event.dayof.day%>/<%= @event.dayof.year%> 
+	</p>
+	<p>
+	  <b>Start:</b>
+	       
+	    	<% if @event.start.hour > 12 %>
+			 			<%= @event.start.hour - 12 %>:
 				
-      	<% end%> 
-</p>
+					<% if @event.start.min == 0 %>
+					  	00 PM
+					<% else %>
+					<% if @event.start.min>9%>
+						<%= @event.start.min %> PM
+						
+						<% else %>
+						0<%= @event.start.min %> PM
+						<% end %>
+					<% end %>
+				
+				
+			<%else%>
+			 
+				<%= @event.start.hour %>:
+					<% if @event.start.min ==0 %>
+					  	00 AM
+					<% else %>
+						<% if @event.start.min>9%>
+						<%= @event.start.min %> AM
+						
+						<% else%>
+						0<%= @event.start.min %> AM
+						<% end %>
+					<% end %>
+						
+					
+	      	<% end%> 
+	</p>
 
 
-<p>
-	
-	<b>Address:</b>
-	    <div class="content">
-  <div id="page_address" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
-   <%= @event.address %> 
-    
-    
-  </div>
-  </div>
+	<p>
+		
+		<b>Address:</b>
+		    <div class="content">
+	  <div id="page_address" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
+	   <%= @event.address %> 
+	    
+	    
+	  </div>
+	  </div>
 
-</p>  Latitude:<% if @event.latitude == nil %>
-warning place will not appear  on gmap because invalid address
- <%= link_to 'fix', edit_event_path(@event)  %>
-<% end%>
+	</p>  Latitude:<% if @event.latitude == nil %>
+	warning place will not appear  on gmap because invalid address
+	 <%= link_to 'fix', edit_event_path(@event)  %>
+	<% end%>
   <%= @event.latitude%>
   
   <p>longitude:
@@ -95,13 +95,9 @@ warning place will not appear  on gmap because invalid address
  
 </p> 
 <% if current_user != nil %>
-<% if current_user.id.to_s == @event.maker.to_s  %> 
-	<%= link_to 'edit date/time/address', edit_event_path(@event)  %> |
-	<%= link_to "Add/Edit Event Description", "/editor" + request.path, id: "edit_link", data: {save_url: mercury_update_event_path(@event)} %>|
-	<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %> |
- 
-
+	<% if current_user.id.to_s == @event.maker.to_s  %> 
+		<%= link_to 'Edit Event Details', edit_event_path(@event)  %> |
+		<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
 	<% end%>
 <%end %>
-	<%= link_to 'Back', events_path %>
 </div>

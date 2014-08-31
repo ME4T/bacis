@@ -1,17 +1,19 @@
  <%= gravatar_for current_user %>
-<h3><%= current_user.name %></h3>
+<h3>
+	<%= current_user.name %>
+</h3>
 <h4>
-  <%= current_user.email %>
+	<%= current_user.email %>
 </h4>
 <span>
-  <%= link_to "view my profile", '/users/' + current_user.id.to_s %>
+	<%= link_to "view my profile", '/users/' + current_user.id.to_s %>
 </span>
 <br />
 <span>
    <%= current_user.address %>
 </span>
-<br /><span>
-	
+<br />
+<span>
 	 Latitude: <%= current_user.latitude %>
 </span>
 
