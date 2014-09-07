@@ -144,3 +144,102 @@ box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+
+#map-container{
+	position:relative;
+
+}
+#map-container .new-event{
+	position:absolute;
+	top:60px;
+	right:20px;
+	padding:10px;
+
+}
+
+
+
+
+.info-window{
+	color:black;
+	width:260px;
+	text-align:center;
+}
+.info-window h1{
+	font-size:20px;
+	margin-top:0;
+	margin-bottom:5px;
+	color: #A5B0FF;
+}
+.info-window h1 a{
+ color:#A5B0FF;
+}
+.info-window p{
+	margin-bottom:5px;
+}
+.info-window .activities img{
+	margin:5px;
+	width:50px;
+
+}
+
+
+
+
+
+
+.event-form .radio{
+
+	float:left;
+}
+.event-form .radio input{
+}
+.event-form  .icon{
+	width:70px;
+	background:#2b435e;
+	padding:4px;
+	margin-right:5px;
+	-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+
+}
+
+
+
+.event-list .event-row{
+	margin-bottom:10px;
+	background:rgba(0,0,0,.7);
+
+}
+.event-list .activities{
+	margin-bottom:10px;
+}
+.event-list .activities img{
+	width:50px;
+	margin-right:10px;
+}
+
+.event-list .top{
+
+}
+.event-list h2{
+	color:white;
+	padding-bottom:5px;
+	margin:0;
+
+	margin-bottom:10px;
+	margin-top:10px;
+	font-size:24px;
+	border-bottom:solid 1px white;
+}
+.event-list h3{
+	margin:0;
+	margin-bottom:5px;
+	font-size:15px;
+
+}
+.event-list .type-image{
+	width:100%;
+
+}

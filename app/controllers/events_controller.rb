@@ -1,3 +1,4 @@
+require 'yaml'
 class EventsController < ApplicationController
     def mercury_update
       post = Event.find(params[:id])
@@ -28,7 +29,7 @@ class EventsController < ApplicationController
   end
   def new
       @event = Event.new 
-    
+      @event_activities = EventActivity.all
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @event }
@@ -37,10 +38,13 @@ class EventsController < ApplicationController
   end
  
   def create 
-       @event = Event.new(params[:event])
+    @event = Event.new(params[:event])
+    @event_activities = EventActivity.all
 
     respond_to do |format|
       if @event.save
+        Notifier.send_new_event_notification(@event)
+
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render json: @event, status: :created, location: @event }
         
@@ -51,7 +55,8 @@ class EventsController < ApplicationController
     end
   end
   def update 
-        @event = Event.find(params[:id])
+    @event = Event.find(params[:id])
+    @event_activities = EventActivity.all
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -65,11 +70,19 @@ class EventsController < ApplicationController
   end
   def edit 
     @event=Event.find(params[:id])
+    @event_activities = EventActivity.all
   end
+
+
   def show
     @event=Event.find(params[:id])
+    @event_activities = EventActivity.find(@event.event_activities)
     @site= "<a href='https://"+@event.website.to_s+"'> </a>"
   end
+
+
+
+
   def index
     @events=Event.all
     

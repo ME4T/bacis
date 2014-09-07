@@ -1,5 +1,7 @@
 Khoa::Application.routes.draw do
   
+  resources :event_activities
+
   ActiveAdmin.routes(self)
 
     namespace :mercury do
@@ -31,6 +33,7 @@ Khoa::Application.routes.draw do
   match '/myevents', to: 'events#myevent'
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
+  match '/terms',   to: 'static_pages#terms'
   match '/contact', to: 'static_pages#contact'
   match '/listevents', to: 'events#list'
   match '/calevents', to: 'events#cal'

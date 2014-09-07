@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140530151507) do
+ActiveRecord::Schema.define(:version => 20140907211900) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(:version => 20140530151507) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "event_activities", :force => true do |t|
+    t.string   "name"
+    t.boolean  "is_active"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "events", :force => true do |t|
     t.string   "location"
     t.text     "contact"
@@ -47,8 +58,8 @@ ActiveRecord::Schema.define(:version => 20140530151507) do
     t.text     "prizes"
     t.text     "cost"
     t.string   "host"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.date     "dayof"
     t.string   "title"
     t.float    "latitude"
@@ -58,6 +69,8 @@ ActiveRecord::Schema.define(:version => 20140530151507) do
     t.string   "maker"
     t.boolean  "approve"
     t.boolean  "isOnline"
+    t.string   "event_activities"
+    t.string   "twitch_stream"
   end
 
   create_table "friends", :force => true do |t|

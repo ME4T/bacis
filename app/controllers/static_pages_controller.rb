@@ -7,6 +7,13 @@ class StaticPagesController < ApplicationController
      @date = params[:date] ? Date.parse(params[:date]) : Date.today
    end
    
+
+   
+
+
+
+
+   
    @locations = Event.all 
  
 
@@ -34,7 +41,24 @@ class StaticPagesController < ApplicationController
          end
          if event.title !=nil
            if event.desc !=nil
-           marker.infowindow "<b>"+event.title+'</b> - '+event.dayof.month.to_s+'/'+event.dayof.day.to_s+'/'+event.dayof.year.to_s+" : \n <br />"+"<a href='https://www."+ event.website.to_s+"'>website: "+event.website+'</a><br />'+event.desc
+
+            event_imgs = ""
+            
+            event.eventActivityObjects.each do |event_activity|
+              event_imgs += "<img src=\"" + event_activity.icon.url(:thumb) + "\">"
+            end
+
+
+            infowindow_html = "<div class=\"info-window\">" +
+            "<h1><a href=\"/events/" + event.id.to_s + "\">"+event.title+"</a></h1>" + 
+            "<p>" +event.dayof.month.to_s+"/"+event.dayof.day.to_s+"/"+event.dayof.year.to_s+"</p>" +
+            "<p><a href=\"/events/" + event.id.to_s + "\">More Info</a></p>" + 
+            "<div class='activities'>"+event_imgs+"</div>" +
+            "</div>"
+
+           marker.infowindow (
+            infowindow_html
+            )
            else
              marker.infowindow  event.desc
            end
@@ -46,14 +70,14 @@ class StaticPagesController < ApplicationController
 
               #Determine which image to use for the gmaps markers
              if event.cat =='view'
-               url='https://cdn2.iconfinder.com/data/icons/simplus-media/165/Layer_15-01-32.png'
+               url='/img/common/marker_red.png'
              elsif event.cat =='tournament'
-              url= 'https://developer.blackberry.com/builtforblackberry/webroot/img/common/game_icon.png'
+               url='/img/common/marker_green.png'
              
              elsif event.cat =='con/pax'
-               "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png"
+               url='/img/common/marker_blue.png'
              else
-                url = 'https://mnli12.wikispaces.com/file/view/Google%20Maps%20Marker%20Blue.png/354394862/Google%20Maps%20Marker%20Blue.png'
+               url='/img/common/marker_purple.png'
              end
            marker.picture({  
              
@@ -62,8 +86,8 @@ class StaticPagesController < ApplicationController
                   
               'url' => url,  
               
-              "width"=>  36,
-              "height"=> 36
+              "width"=>  16,
+              "height"=> 16
            })
            marker.title event.title
            marker.json({ title: event.title})

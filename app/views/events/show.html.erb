@@ -3,17 +3,24 @@
 	<script>
 	   jQuery(window).on('mercury:ready', function() { Mercury.saveUrl = '/events/' + <%= @event.id %> + "/mercury_update"; });
 	</script>
-	<p>
 	   
 	  <h1>  
 	      <div class="content">
-	  <div id="page_topic" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
-	 <%= raw  @event.title %>
-	  
+	  		<div id="page_topic" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
+	 			<%= raw  @event.title %>
+	  		</div>
+	  	  </div> 
+	  </h1>
+	  <h2>Type of event: <%= @event.cat %></h2>
+
+
+	  <div class="thing">
+	  <%= @event.event_activities.to_s %><br />
+		<% @event_activities.each do |event_activity| %>
+		     <%= image_tag event_activity.icon.url(:thumb) %>
+        <% end %>
 	  </div>
-	  </div> </h1>
-	  <h2>Type of event: <%= @event.cat%></h2>
-	</p>
+
 
 	<p>
 	  <b>Date:</b>

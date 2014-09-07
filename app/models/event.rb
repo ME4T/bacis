@@ -1,8 +1,9 @@
 class Event < ActiveRecord::Base
- 
+  serialize :event_activities
+
   attr_accessible :contact, :desc, :location, :maker, :start, :cost, :cat, :dayof
-  attr_accessible :address, :prize, :host, :title, :latitudem, :longitude, :website
-  attr_accessible :approve, :isOnline 
+  attr_accessible :address, :prizes, :host, :title, :latitude, :longitude, :website
+  attr_accessible :approve, :isOnline, :event_activities
 
   geocoded_by :address 
   validates :title,   :maker, :cat, :presence => true
@@ -12,5 +13,13 @@ class Event < ActiveRecord::Base
     end
     def geocode?
       (!address.blank? && (latitude.blank? || longitude.blank?)) || address_changed?
+    end
+
+    def eventActivityObjects
+      if(self.event_activities && self.event_activities.length>0)
+        return EventActivity.find_all_by_id(self.event_activities)
+      else
+        return []
+      end
     end
 end

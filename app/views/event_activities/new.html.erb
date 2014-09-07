@@ -1,0 +1,28 @@
+
+
+
+
+
+<div class='container hero-unit'>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-2">
+			<h1>New Event Activity</h1>
+        </div>
+
+        <% if current_user.admin %>
+            <div class="col-md-12">
+
+                <%= render 'form' %>
+
+            </div>
+
+        <% else %>
+
+            <div class="col-md-10 col-md-offset-2">
+                <p>You must be an administrator to create new event activities</p>
+            </div>
+
+        <% end %>
+
+    </div>
+</div>

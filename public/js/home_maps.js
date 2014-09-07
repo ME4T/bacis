@@ -94,7 +94,8 @@ $(document).ready(function(){
     var options = {
         enableHighAccuracy: true,
         timeout: 5000,
-        maximumAge: 0
+        maximumAge: 0,
+        maxWidth:"500px"
     };
 
     function success(pos) {
@@ -118,11 +119,10 @@ $(document).ready(function(){
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                     picture: {
-                        "url": 'http://www.revolutionarynj.org/wp-content/uploads/2013/01/13576186321669125115.png',
-                        "width":  36,
-                        "height": 36
-                    },
-                    infowindow: 'Current Location '
+                        "url": '/img/common/marker_home.gif',
+                        "width":  20,
+                        "height": 20
+                    }
                 });
             handler.map.centerOn(location);  
      
