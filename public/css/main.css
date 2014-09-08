@@ -7,7 +7,7 @@
 body{
 	background:#020611;
 	color:white;
-	background:url(../img/common/fancy_background.jpg) 0px 100px;
+	background:url(../img/common/fancy_background.jpg) 0px 100px no-repeat black;
 	font-family: 'Lato', sans-serif;
 	font-weight:bold;
 }

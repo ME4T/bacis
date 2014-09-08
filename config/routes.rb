@@ -18,6 +18,7 @@ Khoa::Application.routes.draw do
   resources :posts
   resources :mails
   resources :events
+  resources :users
   mount Mercury::Engine => '/'
 
   resources :events do
