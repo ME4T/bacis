@@ -35,12 +35,13 @@ Khoa::Application.routes.draw do
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/terms',   to: 'static_pages#terms'
+  match '/report',   to: 'static_pages#report'
   match '/contact', to: 'static_pages#contact'
   match '/listevents', to: 'events#list'
   match '/calevents', to: 'events#cal'
   
 
-
+  post "static_pages/report"
   get "static_pages/home"
   get "static_pages/about"
   get "static_pages/help"

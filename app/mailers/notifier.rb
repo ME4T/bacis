@@ -8,4 +8,11 @@ class Notifier < ActionMailer::Base
 			:subject => 'Thanks for signing up for our amazing app' 
 		)
 	end
+
+	def send_report(url)
+		mail( 
+			:to => "mebrelsford@gmail.com",
+			:subject => 'Someone reported content' 
+		)
+	end
 end

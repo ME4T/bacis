@@ -1,46 +1,57 @@
 <% provide(:title, @user.email) %>
-<div class="container hero-unit">
+<div class="container">
     <div class="row">
 
 
+
         <section class="col-md-12">
-            <h1><%= gravatar_for current_user %> <%= current_user.name %></h1>
-             
-            <h4>
-                <%= current_user.email %>
-            </h4>
-            <div>
-                <%= link_to "view my profile", '/users/' + current_user.id.to_s %>
-            </div>
-            <br />
-            <div>
-               <%= current_user.address %>
-            </div>
-            <br />
-            <div>
-                 Latitude: <%= current_user.latitude %>
-            </div>
-            <div>
-                Longitude:   <%= current_user.longitude%>
-            </div>
-            <div>
-                admin : <%= @user.admin %>
-            </div>
+            <a class="report-abuse button-blue">Report Abuse</a>
+
+
+            <h1><%= gravatar_for @user %> <%= @user.name %></h1>
+            
+
+
+
         </section>
         
 
-        <section class="col-md-12">
-            <% if @friends.any? %>
-                <div class="user_avatars">
-                    <% @friends.each do |friend| %>
-                        <%= link_to gravatar_for(friend, size: 30), '/friends/' + friend.id.to_s %>
-                    <% end %>
-                </div>
-            <% end %> 
+
+        <section class="col-md-12 events-created">
+            <h2>Events Created</h2>
+            <div class="event-list">
+                <% @user.events.each do |event| %>
+                    <%= render :partial => "events/event", :locals => {:event => event} %>
+                <% end %>
+            </div>
         </section>
 
+
+
+
         <% if current_user.id == @user.id  %> 
-            <section class="col-md-12">
+
+            <section class="col-md-12 private">
+
+                <hr />
+
+                <h2>Private<h2>
+                <h4>
+                    e-mail: <%= current_user.email %>
+                </h4>
+
+                <div>
+                   address: <%= current_user.address %>
+                </div>
+
+                
+                <div>
+                    latitude: <%= current_user.latitude %>
+                </div>
+                
+                <div>
+                    longitude:   <%= current_user.longitude%>
+                </div>
                 <%= link_to 'Edit User Details', edit_user_path(@user)  %>
             </section>
         <% end %>

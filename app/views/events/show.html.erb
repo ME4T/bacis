@@ -1,110 +1,165 @@
-<div class="container hero-unit">
-	<p id="notice"><%= notice %></p>
-	<script>
-	   jQuery(window).on('mercury:ready', function() { Mercury.saveUrl = '/events/' + <%= @event.id %> + "/mercury_update"; });
-	</script>
-	   
-	  <h1>  
-	      <div class="content">
-	  		<div id="page_topic" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
-	 			<%= raw  @event.title %>
-	  		</div>
-	  	  </div> 
-	  </h1>
-	  <h2>Type of event: <%= @event.cat %></h2>
+<script>
+	jQuery(window).on('mercury:ready', function() { Mercury.saveUrl = '/events/' + <%= @event.id %> + "/mercury_update"; });
+</script>
 
 
-	  <div class="thing">
-	  <%= @event.event_activities.to_s %><br />
-		<% @event_activities.each do |event_activity| %>
-		     <%= image_tag event_activity.icon.url(:thumb) %>
-        <% end %>
-	  </div>
+<div class="container hero-unit event-details">
+    <div class="row">
 
 
-	<p>
-	  <b>Date:</b>
-	   
-	  <%= @event.dayof.month %>/<%= @event.dayof.day%>/<%= @event.dayof.year%> 
-	</p>
-	<p>
-	  <b>Start:</b>
-	       
-	    	<% if @event.start.hour > 12 %>
-			 			<%= @event.start.hour - 12 %>:
-				
-					<% if @event.start.min == 0 %>
-					  	00 PM
-					<% else %>
-					<% if @event.start.min>9%>
-						<%= @event.start.min %> PM
-						
-						<% else %>
-						0<%= @event.start.min %> PM
+	    <section class="col-md-12">
+				<p id="notice"><%= notice %></p>
+
+	    </section>
+	    <section class="col-md-12">
+
+
+	        <a class="report button-blue">Report Inappropriate Content</a>
+
+			<h1>  
+				<%= @event.title %>
+			</h1>
+
+
+	    </section>
+	</div>
+	<div class="row">
+
+	        <div class="col-xs-2 event-type">
+					<% if @event.cat.downcase == "tournament" %>
+			            <img src="/img/event_icons/tournament.png" alt="Tournament" class="type-image" />
+			        <% elsif @event.cat.downcase == "view" %>
+			            <img src="/img/event_icons/viewing_party.png" alt="Viewing Party" class="type-image" />
+			        <% elsif @event.cat.downcase == "lan" %>
+			            <img src="/img/event_icons/lan.png" alt="LAN" class="type-image" />
+			        <% elsif @event.cat.downcase == "meetup" %>
+			            <img src="/img/event_icons/meet_up.png" alt="Meet Up" class="type-image" />
+			        <% else @event.cat.downcase == "other" %>
+			            <img src="/img/event_icons/star.png" alt="Other" class="type-image" />
+			        <% end %>
+					<!-- <%= @event.cat %> -->
+
+			</div>
+			<div class="col-md-4">
+			</div>
+		    <div class="col-md-5 event-activities">
+				<% if @event_activities %>
+					<div class="activity">
+						<% @event_activities.each do |event_activity| %>
+							<%= image_tag event_activity.icon.url(:thumb) %>
 						<% end %>
-					<% end %>
-				
-				
-			<%else%>
-			 
-				<%= @event.start.hour %>:
-					<% if @event.start.min ==0 %>
-					  	00 AM
+					</div>
+				<% end %>
+			</div>
+
+
+
+    		<div class="col-xs-1">
+		    	<div class="date">
+		    		<div class="start"><%= @event.dayof.month %>/<%= @event.dayof.day%></div>
+		    		
+		    		<% if @event.end_date && @event.dayof != @event.end_date %>
+		    			<hr />
+		    			<div class="end"><%= @event.end_date.month %>/<%= @event.end_date.day%></div>
+		    		<% end %>
+		    	
+		    	</div>
+		    </div>
+
+
+
+	</div>
+
+
+
+
+
+	<div class="row">
+		<div class="col-md-6">
+	<!-- 		<p>
+				<b>Date:</b> <%= @event.dayof.month %>/<%= @event.dayof.day%>/<%= @event.dayof.year%> 
+			</p>
+			<p>
+				<b>Start:</b>
+
+				<% if @event.start.hour > 12 %>
+					<%= @event.start.hour - 12 %>:
+
+					<% if @event.start.min == 0 %>
+						00 PM
 					<% else %>
 						<% if @event.start.min>9%>
-						<%= @event.start.min %> AM
-						
-						<% else%>
-						0<%= @event.start.min %> AM
+							<%= @event.start.min %> PM
+
+						<% else %>
+							0<%= @event.start.min %> PM
 						<% end %>
 					<% end %>
-						
-					
-	      	<% end%> 
-	</p>
 
 
-	<p>
-		
-		<b>Address:</b>
-		    <div class="content">
-	  <div id="page_address" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
-	   <%= @event.address %> 
-	    
-	    
-	  </div>
-	  </div>
+				<%else%>
 
-	</p>  Latitude:<% if @event.latitude == nil %>
-	warning place will not appear  on gmap because invalid address
-	 <%= link_to 'fix', edit_event_path(@event)  %>
-	<% end%>
-  <%= @event.latitude%>
-  
-  <p>longitude:
-  	<%= @event.longitude%>
-  </p>
-<p>
-	<br />
-	<p>website:
-		<% a = "https://" + @event.website.to_s%>
-		<a href=<%=a %>  > <%= raw @event.website %> </a> 
-		</p>
-		<br />
-  <b>Description:</b>
-    <div class="content">
-  <div id="page_body" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
-   <%= raw @event.desc %> 
-    
-    
-  </div>
-  </div>
- 
-</p> 
-<% if current_user != nil %>
-	<% if current_user.id.to_s == @event.maker.to_s  %> 
-		<%= link_to 'Edit Event Details', edit_event_path(@event)  %> |
-		<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
-	<% end%>
-<%end %>
+					<%= @event.start.hour %>:
+						<% if @event.start.min ==0 %>
+							00 AM
+						<% else %>
+							<% if @event.start.min>9%>
+								<%= @event.start.min %> AM
+
+							<% else%>
+								0<%= @event.start.min %> AM
+							<% end %>
+						<% end %>
+
+				<% end%> 
+			</p> 
+-->
+
+
+			
+				
+
+			Latitude:<% if @event.latitude == nil %>
+			warning place will not appear  on gmap because invalid address
+			<%= link_to 'fix', edit_event_path(@event)  %>
+			<% end%>
+			<%= @event.latitude%>
+
+			<p>longitude:
+			<%= @event.longitude%>
+			</p>
+			<p>
+			<br />
+			<p>website:
+			<% a = "https://" + @event.website.to_s%>
+			<a href=<%=a %>  > <%= raw @event.website %> </a> 
+			</p>
+			<br />
+			<b>Description:</b>
+			<div class="content">
+			<div id="page_body" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
+			<%= raw @event.desc %> 
+
+
+			</div>
+			</div>
+
+			</p> 
+			<% if current_user != nil %>
+				<% if current_user.id.to_s == @event.user_id  %> 
+					<%= link_to 'Edit Event Details', edit_event_path(@event)  %> |
+					<%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
+				<% end%>
+			<%end %>
+
+        </section>
+
+
+</div>
+
+
+
+
+
+
 </div>

@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   
   has_many :friends, :dependent => :destroy
   has_many :transactions
+  has_many :events
   has_many :authentications, :dependent => :destroy
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140907211900) do
+ActiveRecord::Schema.define(:version => 20140914233923) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -71,6 +71,9 @@ ActiveRecord::Schema.define(:version => 20140907211900) do
     t.boolean  "isOnline"
     t.string   "event_activities"
     t.string   "twitch_stream"
+    t.string   "user_id"
+    t.datetime "end_date"
+    t.time     "end_time"
   end
 
   create_table "friends", :force => true do |t|

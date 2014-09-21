@@ -1,10 +1,12 @@
 class Event < ActiveRecord::Base
   serialize :event_activities
 
-  attr_accessible :contact, :desc, :location, :maker, :start, :cost, :cat, :dayof
+  attr_accessible :contact, :desc, :location, :maker, :start, :end_date, :end_time, :cost, :cat, :dayof
   attr_accessible :address, :prizes, :host, :title, :latitude, :longitude, :website
   attr_accessible :approve, :isOnline, :event_activities
 
+  belongs_to :user
+  
   geocoded_by :address 
   validates :title,   :maker, :cat, :presence => true
   after_validation :geocode, :if => :address_changed?

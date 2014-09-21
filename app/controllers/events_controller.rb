@@ -30,6 +30,7 @@ class EventsController < ApplicationController
   def new
       @event = Event.new 
       @event_activities = EventActivity.all
+
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @event }
@@ -40,6 +41,7 @@ class EventsController < ApplicationController
   def create 
     @event = Event.new(params[:event])
     @event_activities = EventActivity.all
+    @event.user_id = current_user.id
 
     respond_to do |format|
       if @event.save
@@ -76,7 +78,9 @@ class EventsController < ApplicationController
 
   def show
     @event=Event.find(params[:id])
-    @event_activities = EventActivity.find(@event.event_activities)
+    if(@event.event_activities)
+      @event_activities = EventActivity.find(@event.event_activities)
+    end
     @site= "<a href='https://"+@event.website.to_s+"'> </a>"
   end
 

@@ -1,0 +1,53 @@
+<div class="row event-row">
+    <div class="top">
+        <div class="col-md-12 top">
+            <h2><%= link_to(event.title, "/events/"+event.id.to_s, :class=>"") %></h2>
+        </div>
+        <div class="col-xs-1">
+            <% if event.cat.downcase == "tournament" %>
+                <img src="/img/event_icons/tournament.png" alt="Tournament" class="type-image" />
+            <% elsif event.cat.downcase == "view" %>
+                <img src="/img/event_icons/viewing_party.png" alt="Viewing Party" class="type-image" />
+            <% elsif event.cat.downcase == "lan" %>
+                <img src="/img/event_icons/lan.png" alt="LAN" class="type-image" />
+            <% elsif event.cat.downcase == "meetup" %>
+                <img src="/img/event_icons/meet_up.png" alt="Meet Up" class="type-image" />
+            <% else event.cat.downcase == "other" %>
+                <img src="/img/event_icons/star.png" alt="Other" class="type-image" />
+            <% end %>
+        </div>
+        <div class="col-md-3">
+            <h3>Address:</h3> 
+            <p><%= event.address %></p>
+            <h3>Date:</h3> 
+            <p><%= event.dayof %> - <%= event.start.hour.to_s + ":" + event.start.min.to_s %></p>
+        </div>
+        <div class="col-md-2">
+            <h3>Website URL:</h3> 
+            <p><%= link_to event.website %></p>
+            <h3>Event Page:</h3> 
+            <p><%= link_to("Event Details", "/events/"+event.id.to_s, :class=>"") %></p>
+        </div>
+        <div class="col-md-6">
+            <div class="activities">
+                <% event.eventActivityObjects.each do |event_activity| %>
+                    <%= image_tag event_activity.icon.url(:thumb) %>
+                <% end %>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <!-- <%= event.desc %> -->
+
+        </div>
+    </div>
+
+
+    <div>
+        <div class="col-md-12">
+
+
+        </div>
+    </div>
+
+</div>

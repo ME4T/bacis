@@ -1,11 +1,14 @@
-<div class="container hero-unit">
-	<h2>Events List</h2>
-	<% @events.each do |event|%>
-	
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Events List</h1>
+		</div>
 
-		<%= link_to event.title, event %>:<%= event.dayof %>
-
-	<% end %>
+		
+	</div>
+		<% @events.each do |event|%>
+        	<%= render :partial => "events/event", :locals => {:event => event} %>
+		<% end %>
 	
 	
 </div>
