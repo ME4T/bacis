@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
-    end
+    end 
   end
   def new
       @event = Event.new 
@@ -40,6 +40,12 @@ class EventsController < ApplicationController
  
   def create 
     @event = Event.new(params[:event])
+    @event.desc.sub! "\n", "<br />"
+    if @event.website.to_s.include? "http"
+      #do nothing
+    else
+      @event.website = "http://" + @event.website.to_s
+    end
     @event_activities = EventActivity.all
     @event.user_id = current_user.id
 
@@ -56,10 +62,16 @@ class EventsController < ApplicationController
       end
     end
   end
+
   def update 
     @event = Event.find(params[:id])
     @event_activities = EventActivity.all
-
+    @event.desc.sub! "\n", "<br />"
+    if @event.website.to_s.include? "http"
+      #do nothing
+    else
+      @event.website = "http://" + @event.website.to_s
+    end
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }

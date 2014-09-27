@@ -1,21 +1,39 @@
-<% provide(:title, @user.email) %>
-<div class="container">
+<% provide(:title, @user.name) %>
+<div class="container user-profile">
     <div class="row">
 
 
 
+        
+
+
         <section class="col-md-12">
-            <a class="report-abuse button-blue">Report Abuse</a>
+            <div class="">
+                <a class="report button-blue">Report Abuse</a>
+                <div class="gravatar">
+                    <%= gravatar_for @user, size: 52 %>
+                </div>
+                <h1 class="name">
+                    <%=  @user.name %>
+                </h1>
+            </div>
+
+        </section>
 
 
-            <h1><%= gravatar_for @user %> <%= @user.name %></h1>
-            
+        <section class="col-md-12  black-box">
+                <p>Member since: <%= @user.created_at.to_time.strftime('%B %e, %Y at %l:%M %p') %></p>
+                <p>Events Created: <%= @user.events.length %></p>
 
+
+            <% if current_user.id == @user.id  %> 
+                <%= link_to 'Edit User Details', edit_user_path(@user)  %>
+
+
+            <% end %>
 
 
         </section>
-        
-
 
         <section class="col-md-12 events-created">
             <h2>Events Created</h2>
@@ -28,33 +46,6 @@
 
 
 
-
-        <% if current_user.id == @user.id  %> 
-
-            <section class="col-md-12 private">
-
-                <hr />
-
-                <h2>Private<h2>
-                <h4>
-                    e-mail: <%= current_user.email %>
-                </h4>
-
-                <div>
-                   address: <%= current_user.address %>
-                </div>
-
-                
-                <div>
-                    latitude: <%= current_user.latitude %>
-                </div>
-                
-                <div>
-                    longitude:   <%= current_user.longitude%>
-                </div>
-                <%= link_to 'Edit User Details', edit_user_path(@user)  %>
-            </section>
-        <% end %>
 
     </div>
 </div>

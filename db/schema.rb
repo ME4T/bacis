@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140914233923) do
+ActiveRecord::Schema.define(:version => 20140927151806) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(:version => 20140914233923) do
     t.text     "prizes"
     t.text     "cost"
     t.string   "host"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.date     "dayof"
     t.string   "title"
     t.float    "latitude"
@@ -74,6 +74,10 @@ ActiveRecord::Schema.define(:version => 20140914233923) do
     t.string   "user_id"
     t.datetime "end_date"
     t.time     "end_time"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "friends", :force => true do |t|

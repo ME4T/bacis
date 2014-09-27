@@ -11,35 +11,42 @@
                         </div>
                     </div>
 
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-4">
+                                <div class="form-group">
+                                    <%= f.label :dayof, "Start Date", class: "control-label col-md-6" %>
+                                    <div class="col-md-6">
+                                        <%= f.date_select :dayof, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control '}  %>
+                                    </div>
+                                </div>
 
-                    <div class="form-group">
-                        <%= f.label :dayof, "Date of Event", class: "control-label col-md-2" %>
-                        <div class="col-md-3">
-                            <%= f.date_select :dayof, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control col-md-3'}  %>
+                                <div class="form-group">
+                                    <%= f.label :start, "Start Time", class: "control-label col-md-6" %>
+                                    <div class="time-select col-md-6">
+                                        <%= f.time_select(:start, {:minute_step => 15}) %>
+                                    </div>
+
+                                </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <%= f.label :start, class: "control-label col-md-2" %>
-                        <div class="time-select col-md-3">
-                            <%= f.time_select(:start, {:minute_step => 15}) %>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <%= f.label :end_date, "End Date", class: "control-label col-md-6" %>
+                                <div class="col-md-6">
+                                    <%= f.date_select :end_date, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control '}  %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <%= f.label :end_time, class: "control-label col-md-6" %>
+                                <div class="time-select col-md-6">
+                                    <%= f.time_select(:end_time, {:minute_step => 15}) %>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-
-                    <div class="form-group">
-                        <%= f.label :end_date, "End Date", class: "control-label col-md-2" %>
-                        <div class="col-md-3">
-                            <%= f.date_select :end_date, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control col-md-3'}  %>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <%= f.label :end_time, class: "control-label col-md-2" %>
-                        <div class="time-select col-md-3">
-                            <%= f.time_select(:end_time, {:minute_step => 15}) %>
-                        </div>
-                    </div>
-
+                    <hr />
                     <div class="form-group">
                         <%= f.label :type, "Event Type", class: "control-label col-md-2" %>
                         <div class="col-md-10">
@@ -90,6 +97,7 @@
 
                     </div>
 
+                    <hr />
 
                     <div class="form-group">
                         <%= f.label :isOnline, "Online Only", class: "control-label col-md-2" %>
@@ -125,6 +133,12 @@
                     </div>
 
 
+                    <div class="form-group">
+                        <%= f.label :image, "Main Image", class: "control-label col-md-2" %>
+                        <div class="col-md-6">
+                          <%= f.file_field :image, {:class => ''} %>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <%= f.label :desc, "Description<br/>Supports HTML markup".html_safe, class: "control-label col-md-2" %>
