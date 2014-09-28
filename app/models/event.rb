@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   serialize :event_activities
+  scope :find_activity, ->(event_activity_id) { where(event_activities.include? event_activity_id)}
+  scope :future, -> { where("dayof > ?", Date.today) }
 
   attr_accessible :contact, :desc, :location, :maker, :start, :end_date, :end_time, :cost, :cat, :dayof
   attr_accessible :address, :prizes, :host, :title, :latitude, :longitude, :website
@@ -13,6 +15,18 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   after_validation :geocode, :if => :address_changed?
+
+
+  filterrific(
+    # default_settings: { sorted_by: 'dayof_asc' },
+    filter_names: [
+      :search_query,
+      :sorted_by,
+      :with_title,
+      :with_dayof_gte
+    ]
+  )
+
     def gmaps4rails_address
       self.address #describe how to retrieve the address from your model
     end
@@ -27,4 +41,7 @@ class Event < ActiveRecord::Base
         return []
       end
     end
+
+
+
 end

@@ -38,8 +38,17 @@ module ApplicationHelper
     end
   end
   
-  
-  
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  end
+
+  def filterable(options, title)
+    select_tag("title", options_from_collection_for_select(options, "id", "name"))
+  end
+
   def gravatar_for(user, options = { size: 50 })
        gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
        size = options[:size]
