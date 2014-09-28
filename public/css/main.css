@@ -11,7 +11,9 @@ body{
 	font-family: 'Lato', sans-serif;
 	font-weight:bold;
 }
-
+input{
+	color:black;
+}
 
 
 h1{

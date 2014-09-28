@@ -98,7 +98,10 @@ class EventsController < ApplicationController
 
   def index
     @filterrific = Filterrific.new(Event, params[:filterrific])
-
+    
+    @filterrific.select_options = {
+      event_activities: EventActivity.all
+    }
 
 
     game_filter = ""

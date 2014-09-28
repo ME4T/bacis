@@ -1,7 +1,15 @@
-<h1> SUCCESS, FUCKERS </h1>
+ <div id="filterrific_results">
 
 
 
+<div class="row">
+    <div class="col-md-12">
+        <%= page_entries_info events %>
+    </div>
+</div>
+ 
+
+ <% events.each do |event| %>
 
 <div class="row event-row">
     <div class="top">
@@ -73,4 +81,8 @@
 
 </div>
 
+
 <% end %>
+
+
+</div>

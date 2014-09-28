@@ -20,13 +20,13 @@ class Event < ActiveRecord::Base
   filterrific(
     # default_settings: { sorted_by: 'dayof_asc' },
     filter_names: [
-      :search_query,
-      :sorted_by,
-      :with_title,
-      :with_dayof_gte
+      :search_query
     ]
   )
-
+  scope :search_query, lambda { |query|
+    where("title like ?", "%#{query}%")
+    # Filters students whose name or email matches the query
+  }
     def gmaps4rails_address
       self.address #describe how to retrieve the address from your model
     end
