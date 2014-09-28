@@ -4,12 +4,28 @@
 			<h1>Events List</h1>
 		</div>
 
+
 		
 	</div>
+
+
+		<p><%= sortable "title" %></p>
+		<p><%= sortable "dayof" %></p>
+		<%= filterable EventActivity.all, "event_activity" %>
+
+
 		<% @events.each do |event|%>
         	<%= render :partial => "events/event", :locals => {:event => event} %>
 		<% end %>
-	
+
+		<%= will_paginate @events %>
+
+
+		
+
+
+
+<!--  -->
 	
 </div>
 

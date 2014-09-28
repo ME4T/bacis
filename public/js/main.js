@@ -1,1 +1,3 @@
 
+//= require smart_listing
+

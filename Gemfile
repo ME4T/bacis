@@ -7,11 +7,12 @@ gem 'devise'
 gem 'mercury-rails'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'smart_listing'
 
 gem 'bootstrap-sass', '2.0.4'
 gem 'jquery-ui-rails'
 gem 'will_paginate'
-gem 'bootstrap-will_paginate', '0.0.6'
+gem 'bootstrap-will_paginate'
 gem 'twitter'
 gem 'fb_graph'
 gem 'nifty-generators'
@@ -23,7 +24,7 @@ gem 'activeadmin'
 gem 'kaminari'
 gem 'formtastic'
 gem 'omniauth-google-oauth2'
-  
+gem 'filterrific'
 
 # Gems used only for assets and not required
 # in production environments by default.

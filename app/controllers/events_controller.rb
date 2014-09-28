@@ -1,5 +1,9 @@
 require 'yaml'
+
 class EventsController < ApplicationController
+  helper_method :sort_column
+  helper_method :sort_direction
+
     def mercury_update
       post = Event.find(params[:id])
       # Update page
@@ -19,14 +23,7 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
-    def index
-    @locations = Event.all
-    @json = Event.all.to_gmaps4rails
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @events }
-    end 
-  end
+
   def new
       @event = Event.new 
       @event_activities = EventActivity.all
@@ -100,8 +97,27 @@ class EventsController < ApplicationController
 
 
   def index
-    @events=Event.all
-    
+    @filterrific = Filterrific.new(Event, params[:filterrific])
+
+
+
+    game_filter = ""
+
+    if(params[:filter_game]!=nil)
+      game_filter = "'" + params[:filter_game] + "'"
+    end
+    # @events = Event.order(sort_column + " " + sort_direction).where("event_activities like ?", "%#{game_filter}%").paginate(:per_page => 1, :page => params[:page])
+
+    @events = Event.filterrific_find(@filterrific).page(params[:page])
+
+
+    @event_activities = EventActivity.all
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+    #where(event_activities: [4])
   end
   def list
     @event=Event.all
@@ -113,4 +129,28 @@ class EventsController < ApplicationController
     @events=Event.all
     
   end
+
+
+
+
+
+  private
+  
+  def sort_column
+    Event.column_names.include?(params[:sort]) ? params[:sort] : "dayof"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def filter_by_game
+    if
+      params[:game_type]
+    else
+      ""
+    end
+  end
+
+
 end
