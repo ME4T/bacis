@@ -1,6 +1,7 @@
 Khoa::Application.routes.draw do
   
   resources :event_activities
+  resources :event_types
 
   ActiveAdmin.routes(self)
 

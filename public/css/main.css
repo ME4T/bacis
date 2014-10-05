@@ -154,8 +154,8 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 #map-container .new-event{
 	position:absolute;
-	top:60px;
-	right:20px;
+	top:26px;
+	right:120px;
 	padding:10px;
 
 }

@@ -47,35 +47,25 @@
 
                     </div>
                     <hr />
+                    
+
                     <div class="form-group">
-                        <%= f.label :type, "Event Type", class: "control-label col-md-2" %>
+                        <%= f.label :event_types, class: "control-label col-md-2" %>
                         <div class="col-md-10">
-                            <div class="radio col-md-2">
-                                <%= f.radio_button :cat, 'tournament' %>
-                                <img src="/img/event_icons/tournament.png" alt="Tournament" class="icon"/><br />
-                                <%= f.label :cat, 'Tournament' , :value => 'tournament' %>
-                            </div>
-                            <div class="radio col-md-2">
-                                <%= f.radio_button :cat, 'view' %>  
-                                <img src="/img/event_icons/viewing_party.png" alt="Viewing Party" class="icon"/><br />
-                                <%= f.label :cat,'Viewing Party' , :value => 'view' %>
-                            </div>
-                            <div class="radio col-md-2">
-                                <%= f.radio_button :cat, 'lan' %>  
-                                <img src="/img/event_icons/lan.png" alt="LAN" class="icon"/><br />
-                                <%= f.label :cat, 'LAN' , :value => 'lan' %>  
-                            </div>
-                            <div class="radio col-md-2">
-                                <%= f.radio_button :cat, 'meetup' %>  
-                                <img src="/img/event_icons/meet_up.png" alt="Meet Up" class="icon"/><br />
-                                <%= f.label :cat, 'Meet Up' , :value => 'meetup' %>  
-                            </div>
-                            <div class="radio col-md-2">
-                                <%= f.radio_button :cat, 'other' %>  
-                                <img src="/img/event_icons/star.png" alt="Other" class="icon"/><br />
-                                <%= f.label :cat,'Other' , :value => 'other' %>  
-                            </div>
+                            <% @event_types.each do |event_type| %>
+                                <div class="checkbox col-md-2">
+                                    <% if @event.event_types != nil && @event.event_types.include?(event_type.id.to_s) %>
+                                        <%= f.check_box(:event_types, { :multiple => true, :checked => true }, event_type.id, nil) %>
+                                    <% else %>
+                                        <%= f.check_box(:event_types, { :multiple => true }, event_type.id, nil) %>
+
+                                    <% end %>
+                                    <%= image_tag event_type.icon.url(:thumb), {:class => "icon"} %><br />
+                                    <%= f.label :type, event_type.name , :value => event_type.name %>
+                                </div>
+                            <% end %>
                         </div>
+
                     </div>
 
                     <div class="form-group">

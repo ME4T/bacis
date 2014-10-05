@@ -1,0 +1,43 @@
+<%= form_for(@event_type) do |f| %>
+  <% if @event_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_type.errors.count, "error") %> prohibited this event_type from being saved:</h2>
+
+      <ul>
+      <% @event_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="form-group">
+      <%= f.label :name, "Name", class: "control-label col-md-2" %>
+      <div class="col-md-3">
+          <%= f.text_field :name, {:class => 'form-control col-md-3'} %>
+      </div>
+  </div>
+
+
+  <div class="form-group">
+      <%= f.label :icon, "Icon", class: "control-label col-md-2" %>
+      <div class="col-md-3">
+          <%= f.file_field :icon, {:class => 'col-md-3'} %>
+      </div>
+  </div>
+
+  <div class="form-group">
+      <%= f.label :is_active, "Is Active", class: "control-label col-md-2" %>
+      <div class="col-md-3">
+        <%= f.check_box(:is_active, { :checked => true }, :is_active, nil) %>
+      </div>
+  </div>
+  <div class="form-group">
+      <div class="col-md-10 col-md-offset-2">
+          <%= f.submit 'Create Event Type' ,   class: "btn btn-large btn-primary" %>
+      </div>
+  </div>
+
+<% end %>

@@ -10,12 +10,40 @@
 
 		<div class="form-group">
 		  <%= f.label "Search", class: "control-label col-md-1" %>
-		  <div class="col-md-3">
+		  <div class="col-md-2">
 		      <%= f.text_field :search_query, {:class => 'form-control col-md-3 filterrific-periodically-observed'} %>
 		  </div>
+
+
 		</div>
 
 
+		<div class="form-group">
+			<%= f.label "Game", class: "control-label col-md-1" %>
+			<div class="col-md-2">
+			    <%= 
+			    f.select(
+			      :with_game_id,
+			      @filterrific.select_options[:with_game_id],
+			      { include_blank: '- Any -' }
+			    ) %>
+			    <%# See below for the Country.options_for_select presenter method %>
+			  </div>
+
+		</div>
+		<div class="form-group">
+			<%= f.label "Event Type", class: "control-label col-md-1" %>
+			<div class="col-md-2">
+			    <%= 
+			    f.select(
+			      :with_event_type_id,
+			      @filterrific.select_options[:with_event_type_id],
+			      { include_blank: '- Any -' }
+			    ) %>
+			    <%# See below for the Country.options_for_select presenter method %>
+			  </div>
+
+		</div>
 		<%= render_filterrific_spinner %>
 		<% end %>
 

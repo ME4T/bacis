@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140927151806) do
+ActiveRecord::Schema.define(:version => 20141005155039) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(:version => 20140927151806) do
   end
 
   create_table "event_activities", :force => true do |t|
+    t.string   "name"
+    t.boolean  "is_active"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "event_types", :force => true do |t|
     t.string   "name"
     t.boolean  "is_active"
     t.string   "icon_file_name"
@@ -78,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20140927151806) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "event_types"
   end
 
   create_table "friends", :force => true do |t|

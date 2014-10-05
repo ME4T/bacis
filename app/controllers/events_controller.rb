@@ -27,6 +27,7 @@ class EventsController < ApplicationController
   def new
       @event = Event.new 
       @event_activities = EventActivity.all
+      @event_types = EventType.all
 
       respond_to do |format|
         format.html # index.html.erb
@@ -44,6 +45,7 @@ class EventsController < ApplicationController
       @event.website = "http://" + @event.website.to_s
     end
     @event_activities = EventActivity.all
+    @event_types = EventType.all
     @event.user_id = current_user.id
 
     respond_to do |format|
@@ -63,6 +65,7 @@ class EventsController < ApplicationController
   def update 
     @event = Event.find(params[:id])
     @event_activities = EventActivity.all
+    @event_types = EventType.all
     @event.desc.sub! "\n", "<br />"
     if @event.website.to_s.include? "http"
       #do nothing
@@ -82,6 +85,7 @@ class EventsController < ApplicationController
   def edit 
     @event=Event.find(params[:id])
     @event_activities = EventActivity.all
+    @event_types = EventActivity.all
   end
 
 
@@ -89,6 +93,9 @@ class EventsController < ApplicationController
     @event=Event.find(params[:id])
     if(@event.event_activities)
       @event_activities = EventActivity.find(@event.event_activities)
+    end
+    if(@event.event_types)
+      @event_types = EventType.find(@event.event_types)
     end
     @site= "<a href='https://"+@event.website.to_s+"'> </a>"
   end
@@ -100,15 +107,15 @@ class EventsController < ApplicationController
     @filterrific = Filterrific.new(Event, params[:filterrific])
     
     @filterrific.select_options = {
-      event_activities: EventActivity.all
+      event_activities: EventActivity.all,
+      with_game_id: EventActivity.options_for_select,
+      with_event_type_id: EventType.options_for_select
     }
 
-
-    game_filter = ""
-
-    if(params[:filter_game]!=nil)
-      game_filter = "'" + params[:filter_game] + "'"
-    end
+    # game_filter = ""
+    # if(params[:filter_game]!=nil)
+    #   game_filter = "'" + params[:filter_game] + "'"
+    # end
     # @events = Event.order(sort_column + " " + sort_direction).where("event_activities like ?", "%#{game_filter}%").paginate(:per_page => 1, :page => params[:page])
 
     @events = Event.filterrific_find(@filterrific).page(params[:page])
@@ -120,7 +127,6 @@ class EventsController < ApplicationController
       format.html
       format.js
     end
-    #where(event_activities: [4])
   end
   def list
     @event=Event.all

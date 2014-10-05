@@ -47,7 +47,7 @@
             <p><%= link_to("Event Details", "/events/"+event.id.to_s, :class=>"") %></p>
         </div>
         <div class="col-md-6">
-                    <div class="date">
+            <div class="date">
                 <%= event.dayof.month %>/<%= event.dayof.day%>
                 
                 <% if event.end_date && event.dayof != event.end_date %>
