@@ -73,6 +73,8 @@ config.serve_static_assets = true
      user_name: "Khoaapp@gmail.com",
      password: "railsarena"
    }
+
+   
   config.assets.compile = true
 
   # Log the query plan for queries taking more than this (works

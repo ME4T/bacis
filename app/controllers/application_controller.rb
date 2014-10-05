@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   def report
     @url = params[:url]
     puts "REPORTED URL: " + @url
-    Notifier.send_report(@url)
+    Notifier.send_report(@url).deliver
 
     respond_to do |format|
       format.json { render json: @url, status: :created, location: @url }

@@ -39,7 +39,7 @@ module Khoa
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-config.time_zone = 'Central Time (US & Canada)'
+    config.time_zone = 'Central Time (US & Canada)'
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
@@ -56,7 +56,7 @@ config.time_zone = 'Central Time (US & Canada)'
 
     # Enable the asset pipeline
     config.assets.enabled = true
-config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = false
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
