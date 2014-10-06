@@ -1,152 +1,183 @@
 <div class="event-form">
-                <%= form_for(@event, :html => {:class => "new_event form-horizontal", :role => "form"}) do |f| %>
+    <%= form_for(@event, :html => {:class => "new_event form-horizontal", :role => "form"}) do |f| %>
 
 
-                    <%= f.hidden_field :maker, :value => current_user.id %>
 
+        <% if @event.errors.any? %>
+        
+
+        <div id="error_explanation errors">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <strong>The following <%=  pluralize(@event.errors.count, "error") %> prevented this event from being saved:</strong>
+                <ul>
+                  <% @event.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+
+            </div>
+
+
+        </div>
+        
+
+        <% end %>
+
+
+        <%= f.hidden_field :maker, :value => current_user.id %>
+
+        <div class="form-group">
+            <%= f.label :title, class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+            </div>
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
                     <div class="form-group">
-                        <%= f.label :title, class: "control-label col-md-2" %>
+                        <%= f.label :dayof, "Start Date", class: "control-label col-md-6" %>
                         <div class="col-md-6">
-                            <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
-                        </div>
-                    </div>
-
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-4">
-                                <div class="form-group">
-                                    <%= f.label :dayof, "Start Date", class: "control-label col-md-6" %>
-                                    <div class="col-md-6">
-                                        <%= f.date_select :dayof, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control '}  %>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <%= f.label :start, "Start Time", class: "control-label col-md-6" %>
-                                    <div class="time-select col-md-6">
-                                        <%= f.time_select(:start, {:minute_step => 15}) %>
-                                    </div>
-
-                                </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <%= f.label :end_date, "End Date", class: "control-label col-md-6" %>
-                                <div class="col-md-6">
-                                    <%= f.date_select :end_date, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control '}  %>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <%= f.label :end_time, class: "control-label col-md-6" %>
-                                <div class="time-select col-md-6">
-                                    <%= f.time_select(:end_time, {:minute_step => 15}) %>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <hr />
-                    
-
-                    <div class="form-group">
-                        <%= f.label :event_types, class: "control-label col-md-2" %>
-                        <div class="col-md-10">
-                            <% @event_types.each do |event_type| %>
-                                <div class="checkbox col-md-2">
-                                    <% if @event.event_types != nil && @event.event_types.include?(event_type.id.to_s) %>
-                                        <%= f.check_box(:event_types, { :multiple => true, :checked => true }, event_type.id, nil) %>
-                                    <% else %>
-                                        <%= f.check_box(:event_types, { :multiple => true }, event_type.id, nil) %>
-
-                                    <% end %>
-                                    <%= image_tag event_type.icon.url(:thumb), {:class => "icon"} %><br />
-                                    <%= f.label :type, event_type.name , :value => event_type.name %>
-                                </div>
-                            <% end %>
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-                        <%= f.label :games, class: "control-label col-md-2" %>
-                        <div class="col-md-10">
-                            <% @event_activities.each do |event_activity| %>
-                                <div class="checkbox col-md-2">
-                                    <% if @event.event_activities != nil && @event.event_activities.include?(event_activity.id.to_s) %>
-                                        <%= f.check_box(:event_activities, { :multiple => true, :checked => true }, event_activity.id, nil) %>
-                                    <% else %>
-                                        <%= f.check_box(:event_activities, { :multiple => true }, event_activity.id, nil) %>
-
-                                    <% end %>
-                                    <%= image_tag event_activity.icon.url(:thumb), {:class => "icon"} %><br />
-                                    <%= f.label :activity, event_activity.name , :value => event_activity.name %>
-                                </div>
-                            <% end %>
-                        </div>
-
-                    </div>
-
-                    <hr />
-
-                    <div class="form-group">
-                        <%= f.label :isOnline, "Online Only", class: "control-label col-md-2" %>
-                        <div class="col-md-6">
-                            <div class="checkbox">
-                                <%= f.check_box :isOnline %>
-                            </div>
+                            <%= f.date_select :dayof, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control '}  %>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <%= f.label :website, "Website URL", class: "control-label col-md-2" %>
-                        <div class="col-md-6">
-                            <%= f.text_field :website, class: "form-control", placeholder: "Website URL" %>
+                        <%= f.label :start, "Start Time", class: "control-label col-md-6" %>
+                        <div class="time-select col-md-6">
+                            <%= f.time_select(:start, {:minute_step => 15}) %>
                         </div>
+
                     </div>
+            </div>
 
-                    <div class="form-group">
-                        <%= f.label :address, "Location", class: "control-label col-md-2" %>
-                        <div class="col-md-6">
-                            <%= f.text_field :address, class: "form-control", placeholder: "street, city, state or street, zip code" %>
-                        </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <%= f.label :end_date, "End Date", class: "control-label col-md-6" %>
+                    <div class="col-md-6">
+                        <%= f.date_select :end_date, {:order => [:year, :month, :day], :start_year => 2000, :end_year => 2050}, {:class => 'form-control '}  %>
                     </div>
-
-
-
-
-                    <div class="form-group">
-                        <%= f.label :cost, "Cost", class: "control-label col-md-2" %>
-                        <div class="col-md-6">
-                            <%= f.text_field :cost, :value => '0', class: "form-control", placeholder: "0" %>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <%= f.label :end_time, class: "control-label col-md-6" %>
+                    <div class="time-select col-md-6">
+                        <%= f.time_select(:end_time, {:minute_step => 15}) %>
                     </div>
+                </div>
+            </div>
 
+        </div>
+        <hr />
+        
 
-                    <div class="form-group">
-                        <%= f.label :image, "Main Image", class: "control-label col-md-2" %>
-                        <div class="col-md-6">
-                          <%= f.file_field :image, {:class => ''} %>
-                        </div>
+        <div class="form-group">
+            <%= f.label :event_types, class: "control-label col-md-2" %>
+            <div class="col-md-10">
+                <% @event_types.each do |event_type| %>
+                    <div class="checkbox col-md-2">
+                        <% if @event.event_types != nil && @event.event_types.include?(event_type.id.to_s) %>
+                            <%= f.check_box(:event_types, { :multiple => true, :checked => true }, event_type.id, nil) %>
+                        <% else %>
+                            <%= f.check_box(:event_types, { :multiple => true }, event_type.id, nil) %>
+
+                        <% end %>
+                        <%= image_tag event_type.icon.url(:thumb), {:class => "icon"} %><br />
+                        <%= f.label :type, event_type.name , :value => event_type.name %>
                     </div>
-
-                    <div class="form-group">
-                        <%= f.label :desc, "Description<br/>Supports HTML markup".html_safe, class: "control-label col-md-2" %>
-                        <div class="col-md-6">
-                            <%= f.text_area :desc, class: "form-control" %>
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-10 col-md-offset-2">
-                            <%= f.submit 'Create Event' ,   class: "btn btn-large btn-primary" %>
-                        </div>
-                    </div>
-
-                    
-
-
                 <% end %>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <%= f.label :games, class: "control-label col-md-2" %>
+            <div class="col-md-10">
+                <% @event_activities.each do |event_activity| %>
+                    <div class="checkbox col-md-2">
+                        <% if @event.event_activities != nil && @event.event_activities.include?(event_activity.id.to_s) %>
+                            <%= f.check_box(:event_activities, { :multiple => true, :checked => true }, event_activity.id, nil) %>
+                        <% else %>
+                            <%= f.check_box(:event_activities, { :multiple => true }, event_activity.id, nil) %>
+
+                        <% end %>
+                        <%= image_tag event_activity.icon.url(:thumb), {:class => "icon"} %><br />
+                        <%= f.label :activity, event_activity.name , :value => event_activity.name %>
+                    </div>
+                <% end %>
+            </div>
+
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <%= f.label :isOnline, "Online Only", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <div class="checkbox">
+                    <%= f.check_box :isOnline %>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :website, "Website URL", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_field :website, class: "form-control", placeholder: "Website URL" %>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :address, "Country", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.country_select :country, prompt: "Select a Country" %>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :address, "Location", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_field :address, class: "form-control", placeholder: "street, city, state or street, zip code" %>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <%= f.label :cost, "Cost", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_field :cost, :value => '0', class: "form-control", placeholder: "0" %>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <%= f.label :image, "Main Image", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+              <%= f.file_field :image, {:class => ''} %>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :desc, "Description<br/>Supports HTML markup".html_safe, class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_area :desc, class: "form-control" %>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <%= f.submit 'Create Event' ,   class: "btn btn-large btn-primary" %>
+            </div>
+        </div>
+
+        
+
+
+    <% end %>
 
 </div>

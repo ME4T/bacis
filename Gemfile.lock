@@ -64,6 +64,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    countries (0.9.3)
+      currencies (~> 0.4.2)
+    country_select (2.1.0)
+      countries (~> 0.9, >= 0.9.3)
+    currencies (0.4.2)
     devise (3.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -273,6 +278,7 @@ DEPENDENCIES
   bootstrap-sass (= 2.0.4)
   bootstrap-will_paginate
   coffee-rails
+  country_select
   devise
   fb_graph
   filterrific

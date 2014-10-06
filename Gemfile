@@ -8,6 +8,7 @@ gem 'mercury-rails'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'smart_listing'
+gem 'country_select'
 
 gem 'bootstrap-sass', '2.0.4'
 gem 'jquery-ui-rails'
