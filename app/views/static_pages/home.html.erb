@@ -1,111 +1,50 @@
 <div class="container hero-unit" id="map-container">
-
-    <div id="the_map"></div>
-    <%= link_to("Create an Event", "/events/new", :class=>"new-event btn-primary") %>
-</div>
-
-<section class="event-list container">
-
-
-
-
     <div class="row">
         <div class="col-md-12">
+            <div id="the_map"></div>
+            <%= link_to("Create an Event", "/events/new", :class=>"new-event btn-primary") %>
         </div>
     </div>
-
-
-    
-    <div class="row">
-        <div class="col-md-12">
-            <h1> Esports Events</h1>
-        </div>
-    </div>
-
-    <div class="event-list">
-        <% @locations.sort_by{|e| e[:dayOf]}.each do |event|%>
-            <% if event.dayof + (7) >=Date.today %>
-                <div class="row event-row">
-                    <div class="top">
-                        <div class="col-md-12 top">
-                            <h2><%= event.title %></h2>
-
-                        </div>
-                        <div class="col-xs-1">
-                            <% if event.cat.downcase == "tournament" %>
-                                <img src="/img/event_icons/tournament.png" alt="Tournament" class="type-image" />
-                            <% elsif event.cat.downcase == "view" %>
-                                <img src="/img/event_icons/viewing_party.png" alt="Viewing Party" class="type-image" />
-                            <% elsif event.cat.downcase == "lan" %>
-                                <img src="/img/event_icons/lan.png" alt="LAN" class="type-image" />
-                            <% elsif event.cat.downcase == "meetup" %>
-                                <img src="/img/event_icons/meet_up.png" alt="Meet Up" class="type-image" />
-                            <% else event.cat.downcase == "other" %>
-                                <img src="/img/event_icons/star.png" alt="Other" class="type-image" />
-                            <% end %>
-
-                        </div>
-                        <div class="col-md-3">
-                            <h3>Address:</h3> 
-                            <p><%= event.address %></p>
-                            <h3>Date:</h3> 
-                            <p><%= event.dayof %> - <%= event.start.hour.to_s + ":" + event.start.min.to_s %></p>
-                        </div>
-                        <div class="col-md-2">
-                            <h3>Website URL:</h3> 
-                            <p><%= link_to event.website %></p>
-                            <h3>Event Page:</h3> 
-                            <p><%= link_to("Event Details", "/events/"+event.id.to_s, :class=>"") %></p>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="activities">
-                                <% event.eventActivityObjects.each do |event_activity| %>
-                                    <%= image_tag event_activity.icon.url(:thumb) %>
-                                <% end %>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <%= event.desc %>
-
-                        </div>
-                    </div>
-
-
-                    <div>
-                        <div class="col-md-12">
-
-
-                        </div>
-                    </div>
-
-                </div>
-            <% end %>
-        <% end %>
-    </div>
-
-
-
-
-    </div>
-
-
-
-
-
-
-
-
 
 
 </div>
 
 
 
-<script src="activatables.js" type="text/javascript"></script>
-<script type="text/javascript">
-    activatables('page', ['page-1', 'page-2'  ]);
-</script>
+
+
+
+<div class="container buckets">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="inner hero-unit">
+                <h2>Learn More</h2>
+                <p>Gateway gamer is [insert lots of other content here and some other content, maybe some stuff about things and stuff.]</p>
+                <a href="/about-us">About Us</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="inner hero-unit">
+                <h2>View Events</h2>
+                <p>See all of the events in a sortable, filterable list!</p>
+                <a href="/events">Events</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="inner hero-unit">
+                <h2>Create an Account</h2>
+                <p>Before you can create your own events, you'll need to create an account. Don't worry, it's painless!</p>
+                <a href="/users/sign_up">Register</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
 
 
 

@@ -31,20 +31,7 @@
 
 	    </section>
 	    <section class="col-md-6">
-	    		<div class="event-type">
-				<% if @event.cat.downcase == "tournament" %>
-		            <img src="/img/event_icons/tournament.png" alt="Tournament" class="type-image" />
-		        <% elsif @event.cat.downcase == "view" %>
-		            <img src="/img/event_icons/viewing_party.png" alt="Viewing Party" class="type-image" />
-		        <% elsif @event.cat.downcase == "lan" %>
-		            <img src="/img/event_icons/lan.png" alt="LAN" class="type-image" />
-		        <% elsif @event.cat.downcase == "meetup" %>
-		            <img src="/img/event_icons/meet_up.png" alt="Meet Up" class="type-image" />
-		        <% else @event.cat.downcase == "other" %>
-		            <img src="/img/event_icons/star.png" alt="Other" class="type-image" />
-		        <% end %>
-		        </div>
-				<!-- <%= @event.cat %> -->
+
 
 
 				<% if @event_activities %>
@@ -80,19 +67,32 @@
 
 			<div class="content row">
 
-
-				<div class="col-sm-4 event-image">
-					<%= image_tag @event.image.url(:large) %>
-				</div>
-				<div class="col-md-8">
-					<div id="page_body" class="mercury-region" data-type="editable" data-method="PUT"  data-mercury='full'>
-					<%= @event.desc %> 
-
-
+				<% if @event.image.exists? %>
+					<div class="col-sm-4 event-image">
+						<%= image_tag @event.image(:large) %>
 					</div>
-				</div>
+					<div class="col-md-8">
+						<%= raw @event.description %> 
+					</div>
+				<% else %>
+					<div class="col-md-12">
+						<%= raw @event.description %> 
+					</div>
+				<% end %>
+				
+
 			</div>
 
+			<% if @event.twitch_stream && @event.twitch_stream!= "" %>
+
+				<div class="content row">
+					<div class="col-md-12">
+						<h2>Stream</h2>
+						<%= raw @event.twitch_stream %> 
+					</div>
+				</div>
+
+			<% end %>
 
 
 		</div>
@@ -107,31 +107,35 @@
 
 				<h4>Website</h4>
 				<p>
-					<% a = "https://" + @event.website.to_s%>
-					<a href=<%=a %>  > <%= raw @event.website %> </a> 
+					<% if @event.website.to_s != "" %>
+						<% a = "https://" + @event.website.to_s%>
+						<a href=<%=a %>  > <%= raw @event.website %> </a> 
+					<% else %>
+						No website provided
+					<% end %>
+					
 				</p>
 
 				<h4>Address</h4>
 				<p>
-					<%= @event.address %>
+					<% if @event.address != "" %>
+						<%= @event.address %>
+					<% else %>
+						No address provided
+					<% end %>
 				</p>
 
-				<% if @event.latitude == nil %>
-					<p class="warning">Warning place will not appear  on gmap because invalid address<p>
-					<%= link_to 'fix', edit_event_path(@event)  %>
 
-				<% else %>
 
+				<h4>Age Restriction</h4>
 				<p>
-					Latitude:
-					<%= @event.latitude%>
-				</p>
-				<p>
-					Longitude:
-					<%= @event.longitude%>
+					<% if @event.age %>
+						<%= @event.age.to_s %>
+					<% else %>
+						None
+					<% end %>
 				</p>
 
-				<% end%>
 
 				<% if current_user != nil %>
 					<% if current_user.id.to_s == @event.user_id  %> 

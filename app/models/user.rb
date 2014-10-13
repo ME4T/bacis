@@ -11,14 +11,23 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :provider, :uid, :name, :address,:latitude,:longitude, :admin
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :provider, :uid, :name, :address,:latitude,:longitude, :admin, :login
   
   # attr_accessible :title, :body
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
   
-  
+
+validates :email, :uniqueness => true
+
+validates :username,
+  :presence => true,
+  :uniqueness => {
+    :case_sensitive => false
+  }
+
+  attr_accessor :login
   
 def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
@@ -96,6 +105,15 @@ end
     user
   end
   
+def self.find_for_database_authentication(warden_conditions)
+      conditions = warden_conditions.dup
+      if login = conditions.delete(:login)
+        where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      else
+        where(conditions).first
+      end
+    end
+
   def total_borrows
     self.transactions.where(:t_type => 1, :status => 0).sum(:amount)
   end
@@ -111,6 +129,8 @@ end
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
+
+
 
   private
 

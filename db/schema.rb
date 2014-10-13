@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141005222301) do
+ActiveRecord::Schema.define(:version => 20141013192351) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -91,6 +91,9 @@ ActiveRecord::Schema.define(:version => 20141005222301) do
     t.datetime "image_updated_at"
     t.string   "event_types"
     t.string   "country"
+    t.integer  "age"
+    t.string   "description"
+    t.string   "twitch_frame"
   end
 
   create_table "friends", :force => true do |t|
@@ -142,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20141005222301) do
     t.float    "longitude"
     t.boolean  "admin",                  :default => false, :null => false
     t.string   "power"
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

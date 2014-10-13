@@ -5,14 +5,14 @@ class Event < ActiveRecord::Base
   scope :find_activity, ->(event_activity_id) { where(event_activities.include? event_activity_id)}
   scope :future, -> { where("dayof > ?", Date.today) }
 
-  attr_accessible :contact, :desc, :location, :maker, :start, :end_date, :end_time, :cost, :cat, :dayof
-  attr_accessible :address, :prizes, :host, :title, :latitude, :longitude, :website
-  attr_accessible :approve, :isOnline, :event_activities, :event_types, :image, :country
+  attr_accessible :contact, :description, :location, :maker, :start, :end_date, :end_time, :cost, :cat, :dayof
+  attr_accessible :address, :prizes, :host, :title, :latitude, :longitude, :website, :age
+  attr_accessible :approve, :isOnline, :event_activities, :event_types, :image, :country, :twitch_stream
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>", :large => "600x400>" }, :default_url => "/images/:style/missing.png"
 
   belongs_to :user
   
-  validates :title, :maker, :dayof, :presence => true
+  validates :title, :maker, :dayof, :description, :presence => true
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   geocoded_by :address 
@@ -25,9 +25,19 @@ class Event < ActiveRecord::Base
       :search_query,
       :with_game_id,
       :with_event_type_id,
-      :with_user_id
+      :with_user_id,
+      :sorted_by
     ]
   )
+
+    def self.options_for_sorted_by
+    [
+      ['Date Ascending', 'dayof_asc'],
+      ['Date Descending', 'dayof_desc'],
+      ['Age Restriction Ascending', 'age_asc'],
+      ['Age Restriction Descending', 'age_desc']
+    ]
+    end
   scope :search_query, lambda { |query|
     where("title like ?", "%#{query}%")
     # Filters students whose name or email matches the query
@@ -40,6 +50,16 @@ class Event < ActiveRecord::Base
   }
   scope :with_user_id, lambda { |query|
     where("user_id = ?", query) 
+  }
+   scope :sorted_by, lambda { |sort_option|
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+
+    case sort_option.to_s
+       when /^dayof/
+        order("events.dayof #{ direction }")
+      when /^age/
+        order("events.age #{ direction }")
+    end
   }
     def gmaps4rails_address
       self.address #describe how to retrieve the address from your model

@@ -38,8 +38,7 @@ class EventsController < ApplicationController
  
   def create 
     @event = Event.new(params[:event])
-    @event.desc.sub! "\n", "<br />"
-    if @event.website.to_s.include? "http"
+    if @event.website.to_s.include? "http" || @event.website.to_s == ""
       #do nothing
     else
       @event.website = "http://" + @event.website.to_s
@@ -66,8 +65,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event_activities = EventActivity.all
     @event_types = EventType.all
-    @event.desc.sub! "\n", "<br />"
-    if @event.website.to_s.include? "http"
+    if @event.website.to_s.include? "http" || @event.website.to_s == ""
       #do nothing
     else
       @event.website = "http://" + @event.website.to_s
@@ -104,19 +102,16 @@ class EventsController < ApplicationController
 
 
   def index
+
     @filterrific = Filterrific.new(Event, params[:filterrific])
     
     @filterrific.select_options = {
       event_activities: EventActivity.all,
       with_game_id: EventActivity.options_for_select,
-      with_event_type_id: EventType.options_for_select
+      with_event_type_id: EventType.options_for_select,
+      sorted_by: Event.options_for_sorted_by
     }
 
-    # game_filter = ""
-    # if(params[:filter_game]!=nil)
-    #   game_filter = "'" + params[:filter_game] + "'"
-    # end
-    # @events = Event.order(sort_column + " " + sort_direction).where("event_activities like ?", "%#{game_filter}%").paginate(:per_page => 1, :page => params[:page])
 
     @events = Event.filterrific_find(@filterrific).page(params[:page])
 

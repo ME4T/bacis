@@ -19,31 +19,30 @@
         </div>
 
 
-        <div class="col-xs-1">
-            <% if event.cat.downcase == "tournament" %>
-                <img src="/img/event_icons/tournament.png" alt="Tournament" class="type-image" />
-            <% elsif event.cat.downcase == "view" %>
-                <img src="/img/event_icons/viewing_party.png" alt="Viewing Party" class="type-image" />
-            <% elsif event.cat.downcase == "lan" %>
-                <img src="/img/event_icons/lan.png" alt="LAN" class="type-image" />
-            <% elsif event.cat.downcase == "meetup" %>
-                <img src="/img/event_icons/meet_up.png" alt="Meet Up" class="type-image" />
-            <% else event.cat.downcase == "other" %>
-                <img src="/img/event_icons/star.png" alt="Other" class="type-image" />
-            <% end %>
-        </div>
 
+        
 
         <div class="col-md-3">
             <h3>Address:</h3> 
-            <p><%= event.address %></p>
-            <h3>Created by:</h3>
-            <%= link_to event.user.name, '/users/' + event.user.id.to_s %>
+            <% if event.address != "" %>
+                <%= event.address %>
+            <% else %>
+                No address provided
+            <% end %>
+
+
+            <h3>Created by: </h3>
+            <%= link_to event.user.username, '/users/' + event.user.id.to_s %>
         </div>
         <div class="col-md-2">
-            <h3>Website URL:</h3> 
-            <p><%= link_to event.website %></p>
-            <h3>Event Page:</h3> 
+            <h3>Age Restriction</h3>
+            <p>
+                <% if event.age.to_s != "" %>
+                    <%= event.age.to_s %>
+                <% else %>
+                    None
+                <% end %>
+            </p>
             <p><%= link_to("Event Details", "/events/"+event.id.to_s, :class=>"") %></p>
         </div>
         <div class="col-md-6">
@@ -61,7 +60,11 @@
                     <%= image_tag event_activity.icon.url(:thumb) %>
                 <% end %>
             </div>
-
+            <div class="types">
+                <% event.eventTypeObjects.each do |event_type| %>
+                    <%= image_tag event_type.icon.url(:thumb) %>
+                <% end %>
+            </div>
 
         </div>
 
@@ -84,5 +87,10 @@
 
 <% end %>
 
+<div class="row">
+    <div class="col-md-12">
+        <%= page_entries_info events %>
+    </div>
+</div>
 
 </div>

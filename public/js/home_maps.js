@@ -25,16 +25,16 @@ $(document).ready(function(){
         if(desiredHeight<300)
             desiredHeight = 300;
         
-        console.log(desiredHeight)
+
         $("#the_map").height(desiredHeight+"px");
 
 
     }
-    resizeMap();
+    // resizeMap();
 
-    $( window ).resize(function() {
-        resizeMap();
-    });
+    // $( window ).resize(function() {
+    //     resizeMap();
+    // });
 
 
 
@@ -108,29 +108,33 @@ $(document).ready(function(){
 
     //navigator.geolocation.getCurrentPosition(success, error, options);
 
-    handler = Gmaps.build('Google', {markers: { maxRandomDistance: 10000} });
-    handler.buildMap({ provider: {zoom: 6, 'center': new google.maps.LatLng(30.26, -97.742)}, internal: {id: 'the_map'}}, function(){
-        if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(displayOnMap);
-        }
-   
-        function displayOnMap(position){
-            var location = handler.addMarker({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                    picture: {
-                        "url": '/img/common/marker_home.gif',
-                        "width":  20,
-                        "height": 20
-                    }
-                });
-            handler.map.centerOn(location);  
-     
-            gmaps_markers = handler.addMarkers(raw_markers); 
-            createSidebar();
-        };
 
-    });
+    if ($('#the_map').length){
+        
+        handler = Gmaps.build('Google', {markers: { maxRandomDistance: 10000} });
+        handler.buildMap({ provider: {zoom: 6, 'center': new google.maps.LatLng(30.26, -97.742)}, internal: {id: 'the_map'}}, function(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(displayOnMap);
+            }
+       
+            function displayOnMap(position){
+                var location = handler.addMarker({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                        picture: {
+                            "url": '/img/common/marker_home.gif',
+                            "width":  20,
+                            "height": 20
+                        }
+                    });
+                handler.map.centerOn(location);  
+         
+                gmaps_markers = handler.addMarkers(raw_markers); 
+                createSidebar();
+            };
+
+        });
+    }
 
 
     

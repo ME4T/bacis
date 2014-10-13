@@ -78,15 +78,11 @@
 
                       <% else %>
                         <ul>
-                          <li class="social">
-                            <%= link_to image_tag("http://www.trackalerts.com/track-and-field/img/layout/icon_twitter2.png"), user_omniauth_authorize_path(:twitter) %>
-                          </li>
-                          <li  class="social">
-                            <%= link_to image_tag("http://www.giant-bicycles.com/images/interface/facebook_icon_30x30.gif"), user_omniauth_authorize_path(:facebook) %>
-                          </li>
-                          <li class="social">
-                            <%= link_to image_tag("http://metrohm.com/com/images/Instruments/Google-plus-icon.png?__scale=c:transparent,t:4,r=0,q=70,w:42,h:42"), user_omniauth_authorize_path(:google_oauth2) %>
-                          </li>
+
+                        <li class="social"><span class='st_facebook' displayText=''></span></li>
+                        <li class="social"><span class='st_twitter' displayText=''></span></li>
+                        <li class="social"><span class='st_googleplus' displayText=''></span></li>
+
                           <li>
                             <%= link_to "Sign in / Sign up", new_user_session_path %>
                           </li>
