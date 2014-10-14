@@ -4,7 +4,7 @@
 		<%= gravatar_for user, size: 52 %>
 	</div>
 	<h2 class="name">
-		<%= link_to user.name, '/users/' + user.id.to_s %>
+		<%= link_to user.username, '/users/' + user.id.to_s %>
 	</h2>
 	<p>Member since: <%= user.created_at.to_time.strftime('%B %e, %Y at %l:%M %p') %></p>
 	<p>Events Created: <%= user.events.length %></p>
