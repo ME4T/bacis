@@ -140,7 +140,9 @@ margin:0;
 	margin-right:5px;
 }
 
-
+.navbar-right .feedback{
+	color:#DF9860;
+}
 #the_map{
 	width:100%;
 	height:600px;
