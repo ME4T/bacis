@@ -1,18 +1,19 @@
 class Notifier < ActionMailer::Base
-	default from: "robot@gatewaygamer.com"
+	default from: "admin@gatewaygamer.com"
 
 	def send_new_event_notification(event)
 		@event = event
 		mail( 
-			:to => "mebrelsford@gmail.com",
-			:subject => 'Thanks for signing up for our amazing app' 
+			:to => "admin@gatewaygamer.com",
+			:subject => 'New Event Created' 
 		)
 	end
 
 	def send_report(url)
 		mail( 
-			:to => "mebrelsford@gmail.com",
-			:subject => 'Someone reported content' 
+			:to => "admin@gatewaygamer.com",
+			:subject => 'Reported Content',
+			:body: url 
 		)
 	end
 end
