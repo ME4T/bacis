@@ -15,6 +15,5 @@ class Notifier < ActionMailer::Base
 			:subject => 'Reported Content',
 			:text_part => 'other testing'
 		)
-		render "TESTING"
 	end
 end
