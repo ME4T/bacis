@@ -12,7 +12,9 @@ class Notifier < ActionMailer::Base
 	def send_report(url)
 		mail( 
 			:to => "admin@gatewaygamer.com",
-			:subject => 'Reported Content'
+			:subject => 'Reported Content',
+			:text_part => 'other testing'
 		)
+		render "TESTING"
 	end
 end
