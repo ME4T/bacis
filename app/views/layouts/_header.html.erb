@@ -54,8 +54,14 @@
                     </ul>
                 </div>
                 <div class="navbar navbar-right">
+                  <ul>
+                    <li class="social"><a class='facebook' href="http://www.facebook.com"><img src="/img/common/facebook_32.png" alt="Gateway Gamer on Facebook"/></a></li>
+                    <li class="social"><a class='twitter' href="https://twitter.com/Gateway_Gamer"><img src="/img/common/twitter_32.png" alt="Gateway Gamer on Twitter"/></a></li>
+
+
+                    
+
                       <% if signed_in? %>
-                        <ul>
                           
                           <% if current_user.admin? %>
                             <li><%= link_to "Admin Settings", '/admin' %></li>
@@ -74,28 +80,20 @@
                           <li>
                           <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
                           </li>
-
-                          <li>
-                            <a href="https://docs.google.com/forms/d/1c4jtAzaZ0hI1Nc_Lw1L7vwiP8xpacXKQEwMoVFyStKE/viewform?usp=send_form" class="feedback">Submit Feedback</a>
-                          </li>
-                        </ul>
-
                       <% else %>
-                        <ul>
-                          
-                        <li class="social"><span class='st_facebook' displayText=''></span></li>
-                        <li class="social"><span class='st_twitter' displayText=''></span></li>
-                        <li class="social"><span class='st_googleplus' displayText=''></span></li>
+
+                        
 
                           <li>
                             <%= link_to "Sign in / Sign up", new_user_session_path %>
                           </li>
-                          <li>
-                            <a href="https://docs.google.com/forms/d/1c4jtAzaZ0hI1Nc_Lw1L7vwiP8xpacXKQEwMoVFyStKE/viewform?usp=send_form" class="feedback">Submit Feedback</a>
-                          </li>
+                          
                         </ul>
                       <% end %>
-
+                        <li>
+                            <a href="https://docs.google.com/forms/d/1c4jtAzaZ0hI1Nc_Lw1L7vwiP8xpacXKQEwMoVFyStKE/viewform?usp=send_form" class="feedback">Submit Feedback</a>
+                          </li>
+                      </ul>
 
 
 
