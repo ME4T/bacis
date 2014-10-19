@@ -70,7 +70,8 @@ end
         someemail = "#{auth.info.nickname}@NOTREALLY#{auth.provider}.com".sub! " ", ""
       else
         someemail = "#{auth.info.name}@NOTREALLY#{auth.provider}.com".sub! " ", ""
-
+      end
+      
       user.email = someemail
 
       # if(auth.info.email)
