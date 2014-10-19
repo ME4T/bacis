@@ -8,7 +8,10 @@ Khoa::Application.routes.draw do
     namespace :mercury do
       resources :images
     end
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
+
+  match '/auth/:provider/callback' => 'authentications#create'
 
   mount Mercury::Engine => '/'
 
@@ -25,7 +28,6 @@ Khoa::Application.routes.draw do
   resources :events do
     member { put :mercury_update }
     end
-  match '/auth/:provider/callback' => 'authentications#create'
 
 
 

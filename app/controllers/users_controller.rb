@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user != nil
+      
       @friends = @user.friends
       @transactions = @user.transactions.paginate(page: params[:page], per_page: 10)
     end

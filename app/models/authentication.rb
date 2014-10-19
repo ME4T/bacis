@@ -4,10 +4,10 @@ class Authentication < ActiveRecord::Base
   
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
-      authentication.provider = auth.provider
-      authentication.uid = auth.uid
-      authentication.token = auth.token
-      authentication.token_secret = auth.token_secret
+      auth.provider = auth.provider
+      auth.uid = auth.uid
+      auth.token = auth.token
+      auth.token_secret = auth.token_secret
     end
   end
 end

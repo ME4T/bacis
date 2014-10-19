@@ -58,12 +58,21 @@ end
   end
   
   def self.from_omniauth(auth)
+    
+
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid 
-      user.email= auto.info.email
-      user.name=auto.info.name
-       user.address= auto.info.location
+      user.username = auth.info.name
+      user.password= Devise.friendly_token[0,20]
+
+      if(auth.info.email)
+        user.email= auth.info.email
+      else
+        user.email = "#{auth.info.nickname}@#{auth.provider}.com"
+      end
+      user.name=auth.info.name
+      user.address=auth.info.location
       user.save!
     end
   end
@@ -82,7 +91,13 @@ end
   def password_required?
     (authentications.empty? || !password.blank?) && super #&& provider.blank?
   end
-  
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+    end
+  end
   
   def update_with_password(params, *options)
     if encrypted_password.blank?

@@ -540,6 +540,18 @@ padding-top:5px;
 .user-profile .report{
 	float:right;
 }
+
+
+
+#contact .submit{
+	float:right;
+	width:100px;
+}
+#contact textarea{
+	min-height:200px;
+}
+
+
 .button-red{
 	color:white;
 	cursor:pointer;
