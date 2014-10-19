@@ -192,12 +192,35 @@ margin:0;
 
 
 
+.buckets{
+	margin-top:20px;
+}
+.buckets .bucket{
+}
 
 .buckets .inner{
-	padding:20px;
+	width:100%;
+	display:table;
+	font-family:"behatriceregular";
+	text-transform: uppercase;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 30px;
+	line-height:25px;
+	height:160px;
 }
-.buckets .inner h2{
-	margin-top:0;
+.buckets a{
+		-webkit-border-radius: 10px;
+	   -moz-border-radius: 10px;
+	        border-radius: 10px;
+	width:100%;
+	display:table-cell;
+	vertical-align:middle;
+	background:rgba(0,0,0,0.7);
+}
+.buckets a:hover{
+		color:white;
+	text-decoration: none;
 }
 
 
@@ -561,4 +584,20 @@ border:1px solid #25729a; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: -ms-linear-gradient(top, #26759e, #133d5b);
  background-image: -o-linear-gradient(top, #26759e, #133d5b);
  background-image: linear-gradient(to bottom, #26759e, #133d5b);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#26759e, endColorstr=#133d5b);
+}
+
+
+
+
+@font-face {
+    font-family: 'behatriceregular';
+    src: url('/css/fonts/behatrice/behatrice-webfont.eot');
+    src: url('/css/fonts/behatrice/behatrice-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/css/fonts/behatrice/behatrice-webfont.woff2') format('woff2'),
+         url('/css/fonts/behatrice/behatrice-webfont.woff') format('woff'),
+         url('/css/fonts/behatrice/behatrice-webfont.ttf') format('truetype'),
+         url('/css/fonts/behatrice/behatrice-webfont.svg#behatriceregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
