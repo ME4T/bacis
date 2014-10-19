@@ -209,9 +209,9 @@ config.scoped_views = true
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  config.omniauth :facebook, '1492776084279010', '1be9ef30428bd0379b6c58d5cfe50ff9', {:scope => 'publish_stream, email'}
+  config.omniauth :facebook, '646983205422634', 'd01610eb8ff093673facc86608284a5f', {:scope => 'publish_stream, email'}
   #config.omniauth :twitter, '6jaqMt7kE9iVxh8hX0mmtQ', '5ZIydxRBFfEJxc2EzedahIxoeO8g1hZCQVqZFtWWNM'
-  config.omniauth :twitter, 'vu7ox4lurVaumCdcbMmYdrtAn', 'hSo2k2EB7gw6QkNZnC8PJ6DoxfvGyHDfSgBDArgClW4zP4eWvd'
+  config.omniauth :twitter, '2X5tnVbZtlnigkgdOZP3gx7n7', 'dQLQrMuzPaUM8qYOncqjH89BqoZlfPzDmE19ePvcaRZkI7mI5Z'
   #config.omniauth :twitter, ENV["6jaqMt7kE9iVxh8hX0mmtQ"], ENV["5ZIydxRBFfEJxc2EzedahIxoeO8g1hZCQVqZFtWWNM"]
    config.omniauth :google_oauth2,'212787565283-p7vppcphtodjdt1178fferpeetndo107.apps.googleusercontent.com','n3OynCm_72iQh9ovIslvR47g', { access_type: "offline", approval_prompt: "" }
   # ==> Warden configuration
