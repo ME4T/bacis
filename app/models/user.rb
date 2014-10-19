@@ -65,12 +65,12 @@ end
       user.uid = auth.uid 
       user.username = auth.info.name
       user.password= Devise.friendly_token[0,20]
+      user.email = "#{auth.info.nickname}@NOT-REALLY-#{auth.provider}.com"
 
-      if(auth.info.email)
-        user.email= auth.info.email
-      else
-        user.email = "#{auth.info.nickname}@#{auth.provider}.com"
-      end
+      # if(auth.info.email)
+      #   user.email= auth.info.email
+      # else
+      # end
       user.name=auth.info.name
       user.save!
     end
