@@ -72,7 +72,6 @@ end
         user.email = "#{auth.info.nickname}@#{auth.provider}.com"
       end
       user.name=auth.info.name
-      user.address=auth.info.location
       user.save!
     end
   end
