@@ -62,10 +62,9 @@ $(document).ready(function(){
 
 
     function createSidebarLi(shop_json) {
-        return ("<li><a>" + shop_json.title +  " - "+shop_json.date +' - ' + shop_json.location + "<\/a></li>");
+        return ("<li><a>" + shop_json.title +  " - "+shop_json.date +' - ' + shop_json.lat + ", " + shop_json.lng + "<\/a></li>");
     };
  
-
 
     function bindLiToMarker($li, marker){
         $li.click(function(){
@@ -75,18 +74,13 @@ $(document).ready(function(){
     };
 
     function createSidebar(){
-      
         for (var i=0;i<raw_markers.length;i++){
-      
-          
-            if (raw_markers[i].time>0){
+            if (raw_markers[i]){
                 var $li = $( createSidebarLi(raw_markers[i]) );
-        
-             
                 $li.appendTo($('#sidebar_container'));
                 bindLiToMarker($li, gmaps_markers[i]);
-          }
-      }
+            }
+        }
     };
 
 
@@ -111,10 +105,14 @@ $(document).ready(function(){
 
     if ($('#the_map').length){
         
-        handler = Gmaps.build('Google', {markers: { maxRandomDistance: 10000} });
+        handler = Gmaps.build('Google', {markers: { maxRandomDistance: 10} });
+
+
         handler.buildMap({ provider: {zoom: 6, 'center': new google.maps.LatLng(30.26, -97.742)}, internal: {id: 'the_map'}}, function(){
             if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(displayOnMap);
+                // navigator.geolocation.getCurrentPosition(displayOnMap);
+                gmaps_markers = handler.addMarkers(raw_markers); 
+                createSidebar();
             }
        
             function displayOnMap(position){
@@ -130,7 +128,7 @@ $(document).ready(function(){
                 handler.map.centerOn(location);  
          
                 gmaps_markers = handler.addMarkers(raw_markers); 
-                createSidebar();
+                // createSidebar();
             };
 
         });

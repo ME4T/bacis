@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   geocoded_by :address 
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode
 
 
   filterrific(

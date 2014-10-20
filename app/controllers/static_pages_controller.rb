@@ -20,22 +20,17 @@ class StaticPagesController < ApplicationController
   
    @json = Gmaps4rails.build_markers(@locations) do |event, marker|
      
-      
-     if event.dayof + (7) >=Date.today 
-       
   
          marker.lat event.latitude
          marker.lng event.longitude
          marker.title event.title
           marker.json({
-                id:       event.id, 
-                name:     event.title,
-                location: event.address,
-                website: event.website,
-                time: (event.dayof-Date.today+7),
-                cat: event.cat,
-                date: event.dayof.month.to_s+'/'+event.dayof.day.to_s+'/'+event.dayof.year.to_s
-              })
+            id:       event.id, 
+            name:     event.title,
+            website: event.website,
+            cat: event.cat,
+            date: event.dayof.month.to_s+'/'+event.dayof.day.to_s+'/'+event.dayof.year.to_s
+          })
          if event.website ==nil
            event.website=' '
          end
@@ -80,12 +75,7 @@ class StaticPagesController < ApplicationController
                url='/img/common/marker_purple.png'
              end
            marker.picture({  
-             
-            
-                  
-                  
               'url' => url,  
-              
               "width"=>  16,
               "height"=> 16
            })
@@ -93,7 +83,8 @@ class StaticPagesController < ApplicationController
            marker.json({ title: event.title})
         
            end
-      end 
+      
+      
     end
 
   def help
