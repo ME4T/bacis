@@ -562,7 +562,7 @@ padding-top:5px;
 
 #contact .submit{
 	float:right;
-	width:100px;
+	min-width:100px;
 }
 #contact textarea{
 	min-height:200px;
@@ -603,7 +603,7 @@ border:1px solid #df0909; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
  background-image: linear-gradient(to bottom, #f62b2b, #d20202);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f62b2b, endColorstr=#d20202);
  text-decoration: none;
 cursor:default;
- 
+
 }
 .button-blue{
 	color:white;

@@ -34,14 +34,23 @@ class ApplicationController < ActionController::Base
 
   def report
     @url = params[:url]
-    puts "REPORTED URL: " + @url
     Notifier.send_report(@url).deliver
 
     respond_to do |format|
-      format.json { render json: @url, status: :created, location: @url }
+      format.json { render json: @url.to_json }
     end
 
   end
 
+  def contact_ajax
+    @email = params[:email]
+    @contents = params[:contents]
+    Notifier.send_contact(@email, @contents).deliver
+
+    respond_to do |format|
+      format.json { render json: @contents.to_json }
+    end
+
+  end
 
 end

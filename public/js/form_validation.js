@@ -28,7 +28,36 @@ $(document).ready(function() {
 
         }
     });
+    $('form#contact').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        live: 'enabled',
+        fields: {
+            "email": {
+                message: 'The title is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The title is required and cannot be empty'
+                    },emailAddress: {
+                        message: 'The value is not a valid email address'
+                    }
+                }
+            },
+            "contents": {
+                message: 'The description is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The description is required and cannot be empty'
+                    }
+                }
+            }
 
+        }
+    });
 
     $('.registration form').bootstrapValidator({
         message: 'This value is not valid',

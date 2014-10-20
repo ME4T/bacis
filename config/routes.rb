@@ -40,10 +40,12 @@ Khoa::Application.routes.draw do
   match '/terms',   to: 'static_pages#terms'
   match '/report',   to: 'static_pages#report'
   match '/contact', to: 'static_pages#contact'
+  match '/contact_ajax', to: 'static_pages#contact_ajax'
   match '/listevents', to: 'events#list'
   match '/calevents', to: 'events#cal'
   
 
+  post "static_pages/contact_ajax"
   post "static_pages/report"
   get "static_pages/home"
   get "static_pages/about"

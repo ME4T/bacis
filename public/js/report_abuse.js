@@ -12,19 +12,17 @@ $(document).ready(function(){
 
 			$.ajax({
 				type: "POST",
-			    url: "/report?url=" + window.location
+			    url: "/report.json?url=" + window.location
 			})
 			.error(function(data){
 				$currentTarget.text("Something went wrong!! Please try again.");
 				$currentTarget.removeClass("button-blue");
 				$currentTarget.addClass("button-red");
 				$currentTarget.addClass("done");
-				$currentTarget.enabled = false;
 			})
 			.done(function( data ) {
-				$currentTarget.text("Thanks!");
+				$currentTarget.text("Thank you for your report. We are looking into it now.");
 				$currentTarget.addClass("done");
-				$currentTarget.enabled = false;
 			});
 		}
 		return false;
