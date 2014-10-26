@@ -84,8 +84,8 @@ class StaticPagesController < ApplicationController
                   
               'url' => url,  
               
-              "width"=>  16,
-              "height"=> 16
+              "width"=>  32,
+              "height"=> 32
            })
            marker.title event.title
            marker.json({ title: event.title})
