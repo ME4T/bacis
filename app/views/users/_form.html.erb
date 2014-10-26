@@ -1,8 +1,46 @@
 <div class="user-form">
+
+        <% if @user.errors.any? %>
+        
+
+        <div id="error_explanation errors">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-10">
+                <strong>The following <%= pluralize(@user.errors.count, "error") %> prevented this event from being created:</strong>
+                <ul>
+                  <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+
+            </div>
+
+
+        </div>
+        
+
+        <% end %>
                 <%= form_for(@user, :html => {:class => "edit_user form-horizontal", :role => "form"}) do |f| %>
 
-
-
+            	    <div class="form-group">
+			            <%= f.label :name, class: "control-label col-md-2" %>
+			            <div class="col-md-6">
+			                <%= f.text_field :name, class: "form-control", placeholder: "Name" %>
+			            </div>
+			        </div>
+			        <div class="form-group">
+			            <%= f.label :username, class: "control-label col-md-2" %>
+			            <div class="col-md-6">
+			                <%= f.text_field :username, class: "form-control", placeholder: "User Name" %>
+			            </div>
+			        </div>
+					<div class="form-group">
+			            <%= f.label :email, class: "control-label col-md-2" %>
+			            <div class="col-md-6">
+			                <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+			            </div>
+			        </div>
 
 
 

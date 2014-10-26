@@ -73,7 +73,17 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Username is required'
+                    },
+                    remote:{
+                        message: "That username is already taken",
+                        url: "/users/username_exists.json",
+                        data: function(validator){
+                            return{
+                                "username": validator.getFieldElements('user[username]').val()
+                            }
+                        }
                     }
+                   
                 }
             },
             "user[email]": {
@@ -81,6 +91,15 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Email is required'
+                    },
+                    remote:{
+                        message: "That email is already taken.",
+                        url: "/users/email_exists.json",
+                        data: function(validator){
+                            return{
+                                "email": validator.getFieldElements('user[email]').val()
+                            }
+                        }
                     }
                 }
             },

@@ -9,6 +9,8 @@ Khoa::Application.routes.draw do
       resources :images
     end
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+
   devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
 
   match '/auth/:provider/callback' => 'authentications#create'
@@ -22,7 +24,12 @@ Khoa::Application.routes.draw do
   resources :posts
   resources :mails
   resources :events
+
+  get "users/username_exists"
+  get "users/email_exists"
   resources :users
+
+
   mount Mercury::Engine => '/'
 
   resources :events do

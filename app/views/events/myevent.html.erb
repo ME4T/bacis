@@ -1,23 +1,23 @@
 
 <div class='container hero-unit'>
-	<h1>My Events</h1>
-    <% if current_user != nil %>
+	<div class="row">
+	    <% if current_user != nil %>
 
-		<% @events.each do |event|%>
-		
-			<% if event.maker.to_s == current_user.id.to_s%>
-				<%= link_to  event.title, event%>: <%= event.dayof %>
-			<br />
-			<% end%>
-		
-		
+	        <section class="col-md-12 events-created">
+				<h1>My Events</h1>
+	            <div class="event-list">
+
+	                <%= render(
+	                  partial: 'events/listing',
+	                  locals: { events: current_user.events.page(params[:page]) }
+	                ) %>
+	            
+	            </div>
+	        </section>
+		<% else %>
+			<p>You must <%= link_to "sign in", new_user_session_path %> to create an event.</p>
 		<% end %>
-	<% else %>
-		<p>You must <%= link_to "sign in", new_user_session_path %> to create an event.</p>
-	<% end %>
-	
-	
-	
+	</div>
 	
 	
 	

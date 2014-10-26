@@ -51,9 +51,7 @@ class StaticPagesController < ApplicationController
 
             infowindow_html = "<div class=\"info-window\">" +
             "<h1><a href=\"/events/" + event.id.to_s + "\">"+event.title+"</a></h1>" + 
-            "<p>" +event.dayof.month.to_s+"/"+event.dayof.day.to_s+"/"+event.dayof.year.to_s+"</p>" +
-            "<p><a href=\"/events/" + event.id.to_s + "\">More Info</a></p>" + 
-            "<div class='activities'>"+event_imgs+"</div>" +
+            "<p>" + event.dayof.month.to_s+"/"+event.dayof.day.to_s+"/"+event.dayof.year.to_s+"</p>" +
             "</div>"
 
            marker.infowindow (

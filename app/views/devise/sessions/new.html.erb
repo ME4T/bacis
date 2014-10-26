@@ -2,13 +2,16 @@
 	<div class="row">
 
 
+	  
 
 		<section class="col-lg-6 box hero-unit sign-in">
 			<h1 class="">Sign in</h1>
-				<p>Don't have an account? <a href="/users/sign_up">Register Here!</a></p>
+			<p>Don't have an account? <a href="/users/sign_up">Register Here!</a></p>
+			<p class="errors"><%= flash[:alert] %></p>
+
 
 			<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "new_user", :role => "form"}) do |f| %>
-
+				
 				<div class=" form-group">
 
 					<%= f.label :login, class: "control-label" %>

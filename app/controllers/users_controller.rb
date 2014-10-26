@@ -46,6 +46,36 @@ class UsersController < ApplicationController
       end
     end
   end
+  def email_exists
+    @user = User.where("email = ?", params[:email]).first
+    valid = false
+    if(@user)
+      valid = false
+    else
+      valid = true
+    end
+
+    respond_to do |format|
+      format.json { render json: "{\"valid\" : " + valid.to_s + "}" }
+    end
+
+  end
+
+  def username_exists
+
+    @user = User.where("username = ?", params[:username]).first
+
+
+    valid = false
+    if(@user)
+      valid = false
+    else
+      valid = true
+    end
+    respond_to do |format|
+      format.json { render json: "{\"valid\" : " + valid.to_s + "}" }
+    end
+  end
   
 end
   

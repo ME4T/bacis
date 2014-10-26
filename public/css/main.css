@@ -298,6 +298,12 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
 
+
+.new_filterrific input{
+	color:black;
+
+
+}
 #filterrific_results{
 	margin-top:20px;
 }
