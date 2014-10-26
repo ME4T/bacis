@@ -39,32 +39,15 @@ class StaticPagesController < ApplicationController
          if event.website ==nil
            event.website=' '
          end
-         if event.title !=nil
-           if event.desc !=nil
-
-            event_imgs = ""
-            
-            event.eventActivityObjects.each do |event_activity|
-              event_imgs += "<img src=\"" + event_activity.icon.url(:thumb) + "\">"
-            end
 
 
-            infowindow_html = "<div class=\"info-window\">" +
-            "<h1><a href=\"/events/" + event.id.to_s + "\">"+event.title+"</a></h1>" + 
-            "<p>" + event.dayof.month.to_s+"/"+event.dayof.day.to_s+"/"+event.dayof.year.to_s+"</p>" +
-            "</div>"
 
-           marker.infowindow (
+          infowindow_html = "<div class=\"info-window\">" + "<h1><a href=\"/events/" + event.id.to_s + "\">"+event.title+"</a></h1>" + "<p>" + event.dayof.month.to_s+"/"+event.dayof.day.to_s+"/"+event.dayof.year.to_s+"</p>" + "</div>"
+
+          marker.infowindow (
             infowindow_html
-            )
-           else
-             marker.infowindow  event.desc
-           end
-           else
-             if event.desc != nil
-              marker.infowindow event.desc
-              end
-           end
+          )
+             
 
               #Determine which image to use for the gmaps markers
              if event.cat =='view'
@@ -77,13 +60,9 @@ class StaticPagesController < ApplicationController
              else
                url='/img/common/marker_purple.png'
              end
-           marker.picture({  
              
-            
-                  
-                  
+           marker.picture({  
               'url' => url,  
-              
               "width"=>  32,
               "height"=> 32
            })
