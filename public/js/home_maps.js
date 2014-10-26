@@ -121,8 +121,8 @@ $(document).ready(function(){
                         lng: position.coords.longitude,
                         picture: {
                             "url": '/img/common/marker_home.gif',
-                            "width":  20,
-                            "height": 20
+                            "width":  32,
+                            "height": 32
                         }
                     });
                 handler.map.centerOn(location);  
