@@ -132,26 +132,26 @@ $(document).ready(function() {
         }
     });
 
-    $('body').on('focus', '#wysiwyg', function() {
-        var $this = $(this);
-        $this.data('before', $this.html());
-        return $this;
-    }).on('blur keyup paste input', '#wysiwyg', function() {
-        var $this = $(this);
-        if ($this.data('before') != $this.html()) {
-            $this.data('before', $this.html());
-            $this.trigger('change');
-        }
-        return $this;
-    });
+    // $('body').on('focus', '#wysiwyg', function() {
+    //     var $this = $(this);
+    //     $this.data('before', $this.html());
+    //     return $this;
+    // }).on('blur keyup paste input', '#wysiwyg', function() {
+    //     var $this = $(this);
+    //     if ($this.data('before') != $this.html()) {
+    //         $this.data('before', $this.html());
+    //         $this.trigger('change');
+    //     }
+    //     return $this;
+    // });
 
-    $("#wysiwyg").on("change", function(e){
-        var foo = $("#wysiwyg").html();
-        $("#wysiwyg").cleanHtml();
-        $("#wysiwyg").val(foo);
-        console.log($("#wysiwyg").val());
+    // $("#wysiwyg").on("change", function(e){
+    //     var foo = $("#wysiwyg").html();
+    //     $("#wysiwyg").cleanHtml();
+    //     $("#wysiwyg").val(foo);
+    //     console.log($("#wysiwyg").val());
 
-        $("#hidden-desc").val(foo);
-        $("#hidden-desc").trigger("change");
-    });
+    //     $("#hidden-desc").val(foo);
+    //     $("#hidden-desc").trigger("change");
+    // });
 });

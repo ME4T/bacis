@@ -15,7 +15,10 @@
 	            </div>
 	        </section>
 		<% else %>
-			<p>You must <%= link_to "sign in", new_user_session_path %> to create an event.</p>
+			<div class="col-md-12">
+				<h2>My Events</h2>
+				<p>You must <%= link_to "sign in", new_user_session_path %> to view your events an event.</p>
+			</div>
 		<% end %>
 	</div>
 	
