@@ -311,7 +311,12 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	height:100px;
 }
 
-
+select{
+	color:black;
+}
+.event-details select{
+	color:black;
+}
 .event-list select{
 	color:black;
 }
@@ -371,8 +376,14 @@ border-radius: 5px;
 }
 
 .event-row .activities img{
-	width:50px;
-	margin-right:10px;
+		background:#2b435e;
+		width:60px;
+	padding:4px;
+	margin-right:5px;
+	-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;	
+
 }
 .event-row .square-label{
 	width:50px;
@@ -479,12 +490,20 @@ border-radius: 5px;
 	float:right;
 	padding-left:5px;
 
+
 }
 .event-details  .activity{
 	float:right;
+
 }
 .event-details  .activity img{
-	width:60px;
+			background:#2b435e;
+		width:60px;
+	padding:4px;
+	margin-right:5px;
+	-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;	
 
 }
 .event-details .date{

@@ -94,9 +94,9 @@
 
                     <div class="checkbox col-sm-2">
                         <% if @event.other_types %>
-                            <%= f.check_box(:other_types, { :multiple => true, :checked => true }) %>
+                            <%= f.check_box(:other_types, { :checked => true }) %>
                         <% else %>
-                            <%= f.check_box(:other_types, { :multiple => true }) %>
+                            <%= f.check_box(:other_types) %>
                         <% end %>
                         <%= image_tag "/img/event_icons/star.png", {:class => "icon"} %><br />
                         <%= f.label :type, "Other" , :value => "Other" %>
@@ -128,11 +128,11 @@
                         <%= f.label :activity, event_activity.name , :value => event_activity.name %>
                     </div>
                 <% end %>
-                <div class="checkbox col-sm-2">
+                    <div class="checkbox col-sm-2">
                         <% if @event.other_games %>
-                            <%= f.check_box(:other_games, { :multiple => true, :checked => true }) %>
+                            <%= f.check_box(:other_games, {  :checked => true }) %>
                         <% else %>
-                            <%= f.check_box(:other_games, { :multiple => true }) %>
+                            <%= f.check_box(:other_games) %>
                         <% end %>
                         <%= image_tag "/img/event_icons/star.png", {:class => "icon"} %><br />
                         <%= f.label :type, "Other" , :value => "Other" %>

@@ -6,8 +6,8 @@ class Event < ActiveRecord::Base
   scope :future, -> { where("dayof > ?", Date.today) }
 
   attr_accessible :contact, :description, :location, :maker, :start, :end_date, :end_time, :cost, :cat, :dayof
-  attr_accessible :address, :prizes, :host, :title, :latitude, :longitude, :website, :age
-  attr_accessible :approve, :isOnline, :event_activities, :event_types, :image, :country, :twitch_stream
+  attr_accessible :address, :prizes, :host, :title, :latitude, :longitude, :website, :facebook_url, :twitter_url, :age
+  attr_accessible :approve, :isOnline, :event_activities, :event_types, :image, :country, :twitch_stream, :other_types, :other_games
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>", :large => "600x400>" }, :default_url => "/images/:style/missing.png"
 
   belongs_to :user

@@ -65,6 +65,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event_activities = EventActivity.all
     @event_types = EventType.all
+
     if @event.website.to_s.include? "http" || @event.website.to_s == ""
       #do nothing
     else
@@ -83,7 +84,7 @@ class EventsController < ApplicationController
   def edit 
     @event=Event.find(params[:id])
     @event_activities = EventActivity.all
-    @event_types = EventActivity.all
+    @event_types = EventType.all
   end
 
 
