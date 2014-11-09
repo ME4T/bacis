@@ -132,8 +132,8 @@
 				<h4>Website</h4>
 				<p>
 					<% if @event.website.to_s != "" %>
-						<% a = "https://" + @event.website.to_s%>
-						<a href=<%=a %>  > <%= raw @event.website %> </a> 
+						<% a = "https://" + @event.website.to_s %>
+						<a href=<%=a %> class="website"> <%= raw @event.website %> </a> 
 					<% else %>
 						No website provided
 					<% end %>

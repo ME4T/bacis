@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
 
 
   filterrific(
-    # default_settings: { sorted_by: 'dayof_asc' },
+    default_settings: { sorted_by: 'dayof_asc' },
     filter_names: [
       :search_query,
       :with_game_id,

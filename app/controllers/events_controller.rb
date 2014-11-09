@@ -103,6 +103,9 @@ class EventsController < ApplicationController
 
   def index
 
+    puts "================================================"
+    puts params[:filterrific]
+    puts "================================================"
     @filterrific = Filterrific.new(Event, params[:filterrific])
     
     @filterrific.select_options = {

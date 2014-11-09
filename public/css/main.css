@@ -311,6 +311,21 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	height:100px;
 }
 
+
+.event-list select{
+	color:black;
+}
+
+
+.event-list .form-group-inner{
+	height:50px;
+	display:inline;
+}
+.event-list .form-group .form-group-inner>*{
+	position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .event-row .date{
 	float:right;
 
@@ -408,7 +423,10 @@ border-radius: 5px;
 	padding:10px;
 }
 
+.event-details .side-bar .website{
 
+	word-wrap:break-word;
+}
 
 .event-details.top{
 	margin-bottom:20px;
