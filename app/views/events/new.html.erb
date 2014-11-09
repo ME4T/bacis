@@ -1,22 +1,22 @@
 <div class='container hero-unit'>
     <div class="row">
-        <div class="col-md-10 col-md-offset-2">
-            <h1>Create an Event</h1>
-        </div>
+
+
+
 
 
         <% if current_user != nil %>
-            <div class="col-md-12">
-
-
-
-                <%= render 'form' %>
-
-            </div>
-
-        <% else %>
-
             <div class="col-md-10 col-md-offset-2">
+                <h1>Create an Event</h1>
+            </div>
+            <div class="col-md-12">
+                <%= render 'form' %>
+            </div>
+        <% else %>
+            <div class="col-md-10">
+                <h1>Create an Event</h1>
+            </div>
+            <div class="col-md-10">
                 <p>You must <%= link_to "sign in", new_user_session_path %> to create an event.</p>
             </div>
 

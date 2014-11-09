@@ -13,10 +13,11 @@ $(document).ready(function(){
 
 		}else{
 			var contents = $currentTarget.find("#contents").val();
+			var subject = $currentTarget.find("#subject").val();
 			var email = $currentTarget.find("#email").val();
 			$.ajax({
 				type: "POST",
-			    url: "/contact_ajax.json?email=" + email + "&contents=" + contents
+			    url: "/contact_ajax.json?email=" + email + "&contents=" + contents + "&subject=" + subject
 			})
 			.error(function(data){
 				button.val("Something went wrong!! Please try again.");

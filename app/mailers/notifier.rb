@@ -8,13 +8,13 @@ class Notifier < ActionMailer::Base
 			:subject => 'New Event Created' 
 		)
 	end
-	def send_contact(email, contents)
+	def send_contact(email, subject, contents)
 		mail( 
 			:to => "admin@gatewaygamer.com",
-			:subject => 'Contact Form'
+			:subject => 'Gateway Gamer Contact Form: #{subject}'
 		)do |format|
-		  format.text { render text: "From: #{email} \n  Contents: #{contents}" }
-		  format.html { render text: "<p>From: #{email}</p>  <p>Contents: #{contents}</p>" }
+		  format.text { render text: "From: #{email} \n  Subject: #{subject} \nContents: #{contents}" }
+		  format.html { render text: "<p>From: #{email}</p> <p>Subject: #{subject}</p> <p>Contents: #{contents}</p>" }
 		end
 
 	end

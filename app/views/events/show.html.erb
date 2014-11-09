@@ -37,10 +37,31 @@
 				<% if @event_activities %>
 					<div class="activity">
 						<% @event_activities.each do |event_activity| %>
-							<%= image_tag event_activity.icon.url(:thumb) %>
+							<%= image_tag event_activity.icon.url(:thumb), :title=>event_activity.name, :alt=>event_activity.name %>
 						<% end %>
 					</div>
 				<% end %>
+				<% if @event.other_games %>
+					<div class="activity">
+                    	<%= image_tag "/img/event_icons/star.png", {:class => "icon"}, :title=>"Other", :alt=>"Other" %>
+					</div>
+				<% end %>
+
+
+
+            	<% if @event_types %>
+					<div class="activity">
+						<% @event_types.each do |event_type| %>
+							<%= image_tag event_type.icon.url(:thumb), :title=>event_type.name, :alt=>event_type.name %>
+						<% end %>
+					</div>
+				<% end %>   
+				<% if @event.other_types %>
+					<div class="activity">
+                    	<%= image_tag "/img/event_icons/star.png", {:class => "icon"}, :title=>"Other", :alt=>"Other" %>
+					</div>
+				<% end %> 
+
 	    </section>
 
 		<div class="col-md-6 pull-right">
@@ -129,16 +150,33 @@
 	                </li>
                 </ul>
 
-				<h4>Website</h4>
-				<p>
-					<% if @event.website.to_s != "" %>
+
+				<% if @event.website.to_s != "" %>
+					<h4>Website</h4>
+					<p>
+					
 						<% a = "https://" + @event.website.to_s %>
 						<a href=<%=a %> class="website"> <%= raw @event.website %> </a> 
-					<% else %>
-						No website provided
-					<% end %>
 					
-				</p>
+					</p>
+
+				<% end %>
+				<% if @event.facebook_url.to_s != "" %>
+					<h4>Facebook URL</h4>
+					<p>
+						<% a = "https://" + @event.facebook_url.to_s %>
+						<a href=<%=a %> class="website"> <%= raw @event.facebook_url %> </a> 
+					</p>
+
+				<% end %>
+				<% if @event.twitter_url.to_s != "" %>
+					<h4>Twitter URL</h4>
+					<p>
+						<% a = "https://" + @event.twitter_url.to_s %>
+						<a href=<%=a %> class="website"> <%= raw @event.twitter_url %> </a> 
+					</p>
+
+				<% end %>
 
 				<h4>Address</h4>
 				<p>

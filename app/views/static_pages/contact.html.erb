@@ -4,29 +4,44 @@
 <div class="container hero-unit">
 	<form id="contact" class="form-horizontal">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-10 col-md-push-2">
 				<h1>Contact Gateway Gamer</h1>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="form-group">
-		        <label  class="control-label col-md-2">Your e-mail address</label>
+		        <label  class="control-label col-md-2">Your Email address *</label>
 		        <div class="col-md-6">
-		        	<input type="text" class="form-control" placeholder="Your e-mail address" id="email" name="email" />
+		        	<input type="text" class="form-control" placeholder="Your Email address" id="email" name="email" />
 		        </div>
 		    </div>
 	    </div>
+
 	    <br />
+
+		<div class="row">
+			<div class="form-group">
+		        <label  class="control-label col-md-2">Subject</label>
+		        <div class="col-md-6">
+		        	<input type="text" class="form-control" placeholder="Subject" id="subject" name="subject" value="<%= params[:subject] %>" >
+		    	</div>
+	    	</div>
+	    </div>
+
+	    <br />
+
 		<div class="row">
 		    <div class="form-group">
-		        <label class="control-label col-md-2">Contents</label>
+		        <label class="control-label col-md-2">Contents *</label>
 		        <div class="col-md-6">
 		        	<textarea class="form-control" placeholder="Say something!" id="contents" name="contents"></textarea>
 		        </div>
 		    </div>
 		</div>
+
 		<br />
+
 		<div class="row">
 			<div class="col-md-8">
 				<input type="submit" value="Submit" class="button-blue submit">

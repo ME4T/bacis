@@ -45,7 +45,8 @@ class ApplicationController < ActionController::Base
   def contact_ajax
     @email = params[:email]
     @contents = params[:contents]
-    Notifier.send_contact(@email, @contents).deliver
+    @subject = params[:subject]
+    Notifier.send_contact(@email, @subject, @contents).deliver
 
     respond_to do |format|
       format.json { render json: @contents.to_json }

@@ -29,7 +29,7 @@
         <%= f.hidden_field :maker, :value => current_user.id %>
 
         <div class="form-group">
-            <%= f.label :title, class: "control-label col-md-2" %>
+            <%= f.label :title, "Title *", class: "control-label col-md-2" %>
             <div class="col-md-6">
                 <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
             </div>
@@ -74,29 +74,50 @@
         
 
         <div class="form-group">
-            <%= f.label :event_types, class: "control-label col-md-2" %>
+            <div class="control-label col-md-2">
+                <%= f.label :event_types, class: "control-label" %>
+                <p><small>Don't see the event type you want listed? <a href="/contact?subject=Request%20for%20New%20Event%20Type">Tell Us!</a></small></p>
+
+            </div>
             <div class="col-md-10">
                 <% @event_types.each do |event_type| %>
-                    <div class="checkbox col-md-2">
+                    <div class="checkbox col-sm-2">
                         <% if @event.event_types != nil && @event.event_types.include?(event_type.id.to_s) %>
                             <%= f.check_box(:event_types, { :multiple => true, :checked => true }, event_type.id, nil) %>
                         <% else %>
                             <%= f.check_box(:event_types, { :multiple => true }, event_type.id, nil) %>
-
                         <% end %>
                         <%= image_tag event_type.icon.url(:thumb), {:class => "icon"} %><br />
                         <%= f.label :type, event_type.name , :value => event_type.name %>
                     </div>
                 <% end %>
+
+                    <div class="checkbox col-sm-2">
+                        <% if @event.other_types %>
+                            <%= f.check_box(:other_types, { :multiple => true, :checked => true }) %>
+                        <% else %>
+                            <%= f.check_box(:other_types, { :multiple => true }) %>
+                        <% end %>
+                        <%= image_tag "/img/event_icons/star.png", {:class => "icon"} %><br />
+                        <%= f.label :type, "Other" , :value => "Other" %>
+
+                    </div>
+
+                <div class="clearfix"></div>
+
             </div>
 
         </div>
-
+        <hr />
         <div class="form-group">
-            <%= f.label :games, class: "control-label col-md-2" %>
+            <div class="col-md-2 control-label">
+                <%= f.label :games, class: "control-label" %>
+                <p><small>Don't see the game you want listed? <a href="/contact?subject=Request%20for%20New%20Game%20Option">Tell Us!</a></small></p>
+
+            </div>
             <div class="col-md-10">
                 <% @event_activities.each do |event_activity| %>
-                    <div class="checkbox col-md-2">
+                    <div class="checkbox col-sm-2">
                         <% if @event.event_activities != nil && @event.event_activities.include?(event_activity.id.to_s) %>
                             <%= f.check_box(:event_activities, { :multiple => true, :checked => true }, event_activity.id, nil) %>
                         <% else %>
@@ -107,6 +128,16 @@
                         <%= f.label :activity, event_activity.name , :value => event_activity.name %>
                     </div>
                 <% end %>
+                <div class="checkbox col-sm-2">
+                        <% if @event.other_games %>
+                            <%= f.check_box(:other_games, { :multiple => true, :checked => true }) %>
+                        <% else %>
+                            <%= f.check_box(:other_games, { :multiple => true }) %>
+                        <% end %>
+                        <%= image_tag "/img/event_icons/star.png", {:class => "icon"} %><br />
+                        <%= f.label :type, "Other" , :value => "Other" %>
+
+                    </div>
             </div>
 
         </div>
@@ -128,7 +159,28 @@
                 <%= f.text_field :website, class: "form-control", placeholder: "Website URL" %>
             </div>
         </div>
+        <div class="form-group">
+            <%= f.label :facebook_url, "Facebook URL", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_field :facebook_url, class: "form-control", placeholder: "Facebook URL" %>
+            </div>
+        </div>
+        <div class="form-group">
+            <%= f.label :twitter_url, "Twitter URL", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_field :twitter_url, class: "form-control", placeholder: "Twitter URL" %>
+            </div>
+        </div>
 
+
+        
+
+        <div class="form-group">
+            <%= f.label :address, "Location", class: "control-label col-md-2" %>
+            <div class="col-md-6">
+                <%= f.text_field :address, class: "form-control", placeholder: "street, city, state or street, zip code" %>
+            </div>
+        </div>
         <div class="form-group">
             <%= f.label :address, "Country", class: "control-label col-md-2" %>
             <div class="col-md-6">
@@ -137,23 +189,15 @@
         </div>
 
         <div class="form-group">
-            <%= f.label :address, "Location", class: "control-label col-md-2" %>
-            <div class="col-md-6">
-                <%= f.text_field :address, class: "form-control", placeholder: "street, city, state or street, zip code" %>
-            </div>
-        </div>
-
-
-        <div class="form-group">
             <%= f.label :age, "Age Restriction", class: "control-label col-md-2" %>
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <%= f.number_field :age, class: "form-control", placeholder: "Age Restriction. Leave blanks for none." %>
             </div>
         </div>
 
         <div class="form-group">
             <%= f.label :cost, "Cost", class: "control-label col-md-2" %>
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <%= f.text_field :cost,  class: "form-control", placeholder: "0" %>
             </div>
         </div>
@@ -172,11 +216,12 @@
             <%= f.label :twitch_stream, "Stream Embed Code", class: "control-label col-md-2 embed" %>
             <div class="col-md-6">
                 <textarea id="event_twitch_stream" name="event[twitch_stream]" class="form-control"></textarea>
+                <p>You can usually find this on your streaming service by looking for a button labeled Share Stream or "Embed Code." Copy and paste that in the field above.</p>
             </div>
         </div>
 
         <div class="form-group">
-            <%= f.label :description, "Description<br/>Supports HTML markup".html_safe, class: "control-label col-md-2" %>
+            <%= f.label :description, "Description *".html_safe, class: "control-label col-md-2" %>
 
             <div class="col-md-10">
 

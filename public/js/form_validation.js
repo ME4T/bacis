@@ -108,6 +108,11 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Password is required'
+                    },stringLength:{
+                        min: 6,
+                        max: 128,
+                        message: 'Password must be between 6 and 128 characters long.'
+
                     }
                 }
             },

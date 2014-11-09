@@ -18,34 +18,7 @@
             <h2><%= link_to(event.title, "/events/"+event.id.to_s, :class=>"") %></h2>
         </div>
 
-
-
-        
-
-        <div class="col-md-3">
-            <h3>Address:</h3> 
-            <% if event.address != "" %>
-                <%= event.address %>
-            <% else %>
-                No address provided
-            <% end %>
-
-
-            <h3>Created by: </h3>
-            <%= link_to event.user.username, '/users/' + event.user.id.to_s %>
-        </div>
-        <div class="col-md-2">
-            <h3>Age Restriction</h3>
-            <p>
-                <% if event.age.to_s != "" %>
-                    <%= event.age.to_s %>
-                <% else %>
-                    None
-                <% end %>
-            </p>
-            <p><%= link_to("Event Details", "/events/"+event.id.to_s, :class=>"") %></p>
-        </div>
-        <div class="col-md-6">
+        <div class="col-md-7 col-md-push-5">
             <div class="date">
                 <%= event.dayof.month %>/<%= event.dayof.day%>
                 
@@ -56,22 +29,59 @@
             
             </div>
             <div class="activities">
+                <!-- <span class="square-label">Games: </span> -->
                 <% event.eventActivityObjects.each do |event_activity| %>
-                    <%= image_tag event_activity.icon.url(:thumb) %>
+                    <%= image_tag event_activity.icon.url(:thumb), :title=>event_activity.name, :alt=>event_activity.name %>
                 <% end %>
-            </div>
-            <div class="types">
+                <% if event.other_games %>
+                    <%= image_tag "/img/event_icons/star.png", {:class => "icon"}, :title=>"Other", :alt=>"Other" %>
+                <% end %>
+
+
+
+                <!-- <span class="square-label">Event Types:</span> -->
                 <% event.eventTypeObjects.each do |event_type| %>
-                    <%= image_tag event_type.icon.url(:thumb) %>
+                    <%= image_tag event_type.icon.url(:thumb), :title=>event_type.name, :alt=>event_type.name %>
+                <% end %>
+                <% if event.other_types %>
+                    <%= image_tag "/img/event_icons/star.png", {:class => "icon"}, :title=>"Other", :alt=>"Other" %>
                 <% end %>
             </div>
 
         </div>
 
-        <div class="col-md-12">
-            <!-- <%= event.desc %> -->
+        
 
+        <div class="col-sm-3 col-md-pull-7">
+            <h3>Address:</h3> 
+            <% if event.address != "" %>
+                <%= event.address %>
+            <% else %>
+                No address provided
+            <% end %>
+
+
+            <h3>Created by: </h3>
+            <%= link_to event.user.username, '/users/' + event.user.id.to_s %>
+            <br />
+            <br />
         </div>
+
+        <div class="col-sm-2 col-md-pull-7">
+            <h3>Age Restriction</h3>
+            <p>
+                <% if event.age.to_s != "" %>
+                    <%= event.age.to_s %>
+                <% else %>
+                    None
+                <% end %>
+            </p>
+            <p><%= link_to("Event Details", "/events/"+event.id.to_s, :class=>"") %></p>
+            <br />
+        </div>
+
+
+
     </div>
 
 
