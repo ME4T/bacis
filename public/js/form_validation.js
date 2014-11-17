@@ -24,6 +24,30 @@ $(document).ready(function() {
                         message: 'The description is required and cannot be empty'
                     }
                 }
+            },
+            "event[website]":{
+                message: 'The URL is not valid. Ensure presence of http://',
+                validators: {
+                    uri: {
+                        message: 'The URL is not valid.'
+                    }
+                }                
+            },
+            "event[facebook_url]":{
+                message: 'The URL is not valid. Ensure presence of http://',
+                validators: {
+                    uri: {
+                        message: 'The URL is not valid.'
+                    }
+                }                
+            },
+            "event[twitter_url]":{
+                message: 'The URL is not valid. Ensure presence of http://',
+                validators: {
+                    uri: {
+                        message: 'The URL is not valid.'
+                    }
+                }                
             }
 
         }
@@ -58,6 +82,64 @@ $(document).ready(function() {
 
         }
     });
+    $('form.edit_user').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        live: 'enabled',
+        fields: {
+            "user[username]": {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'Username is required'
+                    }
+                   
+                }
+            },
+            "user[email]": {
+                message: 'The email is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'Email is required'
+                    }
+                }
+            },
+            "user[password]": {
+                message: 'The password is not valid',
+                validators: {
+                    stringLength:{
+                        min: 6,
+                        max: 128,
+                        message: 'Password must be between 6 and 128 characters long.'
+
+                    }
+                }
+            },
+            "user[password_confirmation]": {
+                message: 'The password confirmation is not valid',
+                validators: {
+                    identical: {
+                        field: 'user[password]',
+                        message: 'The password and its confirmation are not the same'
+                    }
+                }
+            },
+            "user[current_password]": {
+                message: 'The password confirmation is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'Current Password is required in order to make any changes.'
+                    }
+                }
+            }
+
+        }
+    });
+
 
     $('.registration form').bootstrapValidator({
         message: 'This value is not valid',
@@ -132,6 +214,30 @@ $(document).ready(function() {
         }
     });
 
+    var isOnline = $(".is-online input").is(':checked');
+
+    if(isOnline){
+        $(".location-wrap").hide();
+    }else{
+        $(".location-wrap").show();
+    }
+
+    $(".is-online input").on("change", function(e){
+        var $currentTarget = $(e.currentTarget);
+        var isOnlineChecked = $currentTarget.is(':checked');
+        if(isOnlineChecked){
+            $(".location-wrap").hide();
+        }else{
+            $(".location-wrap").show();
+
+        }
+
+    });
+
+    $('.input-group.date').datepicker({
+        startDate: ""+new Date()+"",
+        todayHighlight: true
+    });
     // $('body').on('focus', '#wysiwyg', function() {
     //     var $this = $(this);
     //     $this.data('before', $this.html());

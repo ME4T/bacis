@@ -44,11 +44,33 @@ a:hover{
 	color:#EBC2A2;
 }
 
+.notice{
+	background:rgba(0,0,0,.5);
+	padding-top:20px;
+	padding-bottom:20px;
 
+}
 
+.icon{
+	width:70px;
+	background:#2b435e;
+	padding:4px;
+	margin-right:5px;
+	-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
 
+}
 
+.info-window .icon{
+	width:40px;
 
+}
+
+.info-window .more-info{
+	padding-top:10px;
+	display:block;
+}
 
 .wysihtml5-toolbar .btn {
 	font-size: 14px;
@@ -279,8 +301,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
 
-.date{
-
+.date-block{
 	background:#2b435e;
 	-webkit-border-radius: 5px;
 	   -moz-border-radius: 5px;
@@ -293,7 +314,7 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 	margin-right:20px;
 	display:inline-block;
 }
-.date hr{
+.date-block hr{
 	margin:3px;
 }
 
@@ -333,7 +354,7 @@ select{
 }
 
 
-.event-row .date{
+.event-row .date-block{
 	float:right;
 
 
@@ -346,16 +367,7 @@ select{
 }
 .event-form .radio input{
 }
-.event-form  .icon{
-	width:70px;
-	background:#2b435e;
-	padding:4px;
-	margin-right:5px;
-	-webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
 
-}
 
 
 
@@ -506,7 +518,7 @@ border-radius: 5px;
 border-radius: 5px;	
 
 }
-.event-details .date{
+.event-details .date-block{
 
 	background:#2b435e;
 	-webkit-border-radius: 5px;
@@ -526,7 +538,10 @@ border-radius: 5px;
 	margin-top:0;
 }
 
-
+.event-details .video{
+	padding-top:20px;
+	padding-bottom:10px;
+}
 
 
 

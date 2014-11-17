@@ -6,7 +6,7 @@
         <% if @event.errors.any? %>
         
 
-        <div id="error_explanation errors">
+        <div id="error_explanation" class="errors">
             <div class="col-md-2">
             </div>
             <div class="col-md-10">
@@ -87,8 +87,7 @@
                         <% else %>
                             <%= f.check_box(:event_types, { :multiple => true }, event_type.id, nil) %>
                         <% end %>
-                        <%= image_tag event_type.icon.url(:thumb), {:class => "icon"} %><br />
-                        <%= f.label :type, event_type.name , :value => event_type.name %>
+                        <%= image_tag event_type.icon.url(:thumb), :class=>"tooltipper icon", :data => { :tooltip => event_type.name } %><br />
                     </div>
                 <% end %>
 
@@ -98,8 +97,7 @@
                         <% else %>
                             <%= f.check_box(:other_types) %>
                         <% end %>
-                        <%= image_tag "/img/event_icons/star.png", {:class => "icon"} %><br />
-                        <%= f.label :type, "Other" , :value => "Other" %>
+                        <%= image_tag "/img/event_icons/question_mark.png", :class=>"tooltipper icon", :data => { :tooltip => "Other" } %><br />
 
                     </div>
 
@@ -124,8 +122,7 @@
                             <%= f.check_box(:event_activities, { :multiple => true }, event_activity.id, nil) %>
 
                         <% end %>
-                        <%= image_tag event_activity.icon.url(:thumb), {:class => "icon"} %><br />
-                        <%= f.label :activity, event_activity.name , :value => event_activity.name %>
+                        <%= image_tag event_activity.icon.url(:thumb), :class=>"tooltipper icon", :data => { :tooltip => event_activity.name } %><br />
                     </div>
                 <% end %>
                     <div class="checkbox col-sm-2">
@@ -134,8 +131,8 @@
                         <% else %>
                             <%= f.check_box(:other_games) %>
                         <% end %>
-                        <%= image_tag "/img/event_icons/star.png", {:class => "icon"} %><br />
-                        <%= f.label :type, "Other" , :value => "Other" %>
+                        <%= image_tag "/img/event_icons/star.png", :class=>"tooltipper icon", :data => { :tooltip => "Other" }  %><br />
+                       
 
                     </div>
             </div>
@@ -144,14 +141,33 @@
 
         <hr />
 
-        <div class="form-group">
-            <%= f.label :isOnline, "Online Only", class: "control-label col-md-2" %>
+        <div class="form-group is-online">
+            <%= f.label :isOnline, "Online Only", class: " control-label col-md-2" %>
             <div class="col-md-6">
                 <div class="checkbox">
                     <%= f.check_box :isOnline %>
                 </div>
             </div>
         </div>
+
+        <div class="location-wrap">
+            <div class="form-group">
+                <div class="col-md-2 control-label">
+                    <%= f.label :address, "Location", class: "control-label" %>
+                </div>
+                <div class="col-md-6">
+                    <%= f.text_field :address, class: "form-control", placeholder: "street, city, state or street, zip code" %>
+                    <p><small>street, city, state or street, zip code</small></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <%= f.label :address, "Country", class: "control-label col-md-2" %>
+                <div class="col-md-6">
+                    <%= f.country_select :country, prompt: "Select a Country" %>
+                </div>
+            </div>
+        </div>
+
 
         <div class="form-group">
             <%= f.label :website, "Website URL", class: "control-label col-md-2" %>
@@ -175,18 +191,7 @@
 
         
 
-        <div class="form-group">
-            <%= f.label :address, "Location", class: "control-label col-md-2" %>
-            <div class="col-md-6">
-                <%= f.text_field :address, class: "form-control", placeholder: "street, city, state or street, zip code" %>
-            </div>
-        </div>
-        <div class="form-group">
-            <%= f.label :address, "Country", class: "control-label col-md-2" %>
-            <div class="col-md-6">
-                <%= f.country_select :country, prompt: "Select a Country" %>
-            </div>
-        </div>
+
 
         <div class="form-group">
             <%= f.label :age, "Age Restriction", class: "control-label col-md-2" %>
@@ -213,9 +218,10 @@
 
 
         <div class="form-group">
-            <%= f.label :twitch_stream, "Stream Embed Code", class: "control-label col-md-2 embed" %>
+            <%= f.label :twitch_stream, "Embed code for Stream or Video", class: "control-label col-md-2 embed" %>
             <div class="col-md-6">
-                <textarea id="event_twitch_stream" name="event[twitch_stream]" class="form-control"></textarea>
+                <%= f.text_area :twitch_stream, {:class => 'form-control'} %>
+                <!-- <textarea id="event_twitch_stream" name="event[twitch_stream]" class="form-control"></textarea> -->
                 <p>You can usually find this on your streaming service by looking for a button labeled Share Stream or "Embed Code." Copy and paste that in the field above.</p>
             </div>
         </div>

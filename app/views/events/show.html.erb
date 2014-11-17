@@ -6,7 +6,7 @@
 
 
 	    <section class="col-md-12">
-				<p id="notice"><%= notice %></p>
+			<p id="notice"><%= notice %></p>
 
 	    </section>
 
@@ -15,7 +15,7 @@
 	    <section class="col-md-6 title">
 
 
-			<div class="date">
+			<div class="date-block">
 				<%= @event.dayof.month %>/<%= @event.dayof.day%>
 				
 				<% if @event.end_date && @event.dayof != @event.end_date %>
@@ -37,13 +37,13 @@
 				<% if @event_activities %>
 					<div class="activity">
 						<% @event_activities.each do |event_activity| %>
-							<%= image_tag event_activity.icon.url(:thumb), :title=>event_activity.name, :alt=>event_activity.name %>
+							<%= image_tag event_activity.icon.url(:thumb), :title=>event_activity.name, :alt=>event_activity.name, :class=>"tooltipper icon", :data => { :tooltip => event_activity.name } %>
 						<% end %>
 					</div>
 				<% end %>
 				<% if @event.other_games %>
 					<div class="activity">
-                    	<%= image_tag "/img/event_icons/star.png", :title=>"Other", :alt=>"Other Games" %>
+                    	<%= image_tag "/img/event_icons/star.png", :title=>"Other", :alt=>"Other Games", :class=>"tooltipper icon", :data => { :tooltip => "Other" } %>
 					</div>
 				<% end %>
 
@@ -52,13 +52,13 @@
             	<% if @event_types %>
 					<div class="activity">
 						<% @event_types.each do |event_type| %>
-							<%= image_tag event_type.icon.url(:thumb), :title=>event_type.name, :alt=>event_type.name %>
+							<%= image_tag event_type.icon.url(:thumb), :title=>event_type.name, :alt=>event_type.name, :class=>"tooltipper icon", :data => { :tooltip => event_type.name } %>
 						<% end %>
 					</div>
 				<% end %>   
 				<% if @event.other_types %>
 					<div class="activity">
-                    	<%= image_tag "/img/event_icons/star.png", :title=>"Other", :alt=>"Other Event Types" %>
+                    	<%= image_tag "/img/event_icons/question.png", :title=>"Other", :alt=>"Other Event Types", :class=>"tooltipper icon", :data => { :tooltip => "Other" } %>
 					</div>
 				<% end %> 
 
@@ -102,18 +102,14 @@
 				<% end %>
 				
 
-			</div>
-
-			<% if @event.twitch_stream && @event.twitch_stream!= "" %>
-
-				<div class="content row">
-					<div class="col-md-12">
-						<h2>Stream</h2>
+				<% if @event.twitch_stream && @event.twitch_stream!= "" %>
+					<div class="col-md-12 video">
 						<%= raw @event.twitch_stream %> 
 					</div>
-				</div>
+				<% end %>
 
-			<% end %>
+			</div>
+
 
 
 		</div>
@@ -155,7 +151,7 @@
 					<h4>Website</h4>
 					<p>
 					
-						<% a = "https://" + @event.website.to_s %>
+						<% a = @event.website.to_s %>
 						<a href=<%=a %> class="website"> <%= raw @event.website %> </a> 
 					
 					</p>
@@ -164,7 +160,7 @@
 				<% if @event.facebook_url.to_s != "" %>
 					<h4>Facebook URL</h4>
 					<p>
-						<% a = "https://" + @event.facebook_url.to_s %>
+						<% a = @event.facebook_url.to_s %>
 						<a href=<%=a %> class="website"> <%= raw @event.facebook_url %> </a> 
 					</p>
 
@@ -172,7 +168,7 @@
 				<% if @event.twitter_url.to_s != "" %>
 					<h4>Twitter URL</h4>
 					<p>
-						<% a = "https://" + @event.twitter_url.to_s %>
+						<% a = @event.twitter_url.to_s %>
 						<a href=<%=a %> class="website"> <%= raw @event.twitter_url %> </a> 
 					</p>
 
@@ -180,7 +176,9 @@
 
 				<h4>Address</h4>
 				<p>
-					<% if @event.address != "" %>
+					<% if @event.isOnline %>
+						Online Only
+					<% elsif @event.address != "" %>
 						<%= @event.address %>
 					<% else %>
 						No address provided
@@ -191,13 +189,21 @@
 
 				<h4>Age Restriction</h4>
 				<p>
-					<% if @event.age %>
+					<% if @event.age.to_s != "" %>
 						<%= @event.age.to_s %>
 					<% else %>
 						None
 					<% end %>
 				</p>
 
+				<h4>Cost</h4>
+				<p>
+					<% if @event.cost.to_s != "" %>
+						<%= @event.cost.to_s %>
+					<% else %>
+						None
+					<% end %>
+				</p>
 
 				<% if current_user != nil %>
 					<% if current_user.id.to_s == @event.user_id  %> 
@@ -225,7 +231,6 @@
 
 
 
-				
 
 
 

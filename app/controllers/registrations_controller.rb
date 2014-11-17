@@ -4,7 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
     super
     session[:omniauth] = nil unless @user.new_record?
   end
-  
+
   def build_resource(*args)
       super
       if session[:omniauth]
@@ -13,4 +13,13 @@ class RegistrationsController < Devise::RegistrationsController
       end
   end
     
+
+  protected
+
+  def after_update_path_for(resource)
+    flash[:notice] = "Successfully updated user info."
+    user_path(resource)
+  end
+
+
 end

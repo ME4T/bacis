@@ -66,11 +66,6 @@ class EventsController < ApplicationController
     @event_activities = EventActivity.all
     @event_types = EventType.all
 
-    if @event.website.to_s.include? "http" || @event.website.to_s == ""
-      #do nothing
-    else
-      @event.website = "http://" + @event.website.to_s
-    end
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -104,16 +99,15 @@ class EventsController < ApplicationController
 
   def index
 
-    puts "================================================"
-    puts params[:filterrific]
-    puts "================================================"
     @filterrific = Filterrific.new(Event, params[:filterrific])
     
+
     @filterrific.select_options = {
       event_activities: EventActivity.all,
       with_game_id: EventActivity.options_for_select,
       with_event_type_id: EventType.options_for_select,
-      sorted_by: Event.options_for_sorted_by
+      sorted_by: Event.options_for_sorted_by,
+      ends_after_yesterday: ""
     }
 
 
@@ -127,6 +121,8 @@ class EventsController < ApplicationController
       format.js
     end
   end
+
+  
   def list
     @event=Event.all
   end
@@ -135,7 +131,6 @@ class EventsController < ApplicationController
   end
   def myevent
     @events=Event.all
-    
   end
 
 

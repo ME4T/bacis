@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-md-7 col-md-push-5">
-            <div class="date">
+            <div class="date-block">
                 <%= event.dayof.month %>/<%= event.dayof.day%>
                 
                 <% if event.end_date && event.dayof != event.end_date %>
@@ -31,20 +31,20 @@
             <div class="activities">
                 <!-- <span class="square-label">Games: </span> -->
                 <% event.eventActivityObjects.each do |event_activity| %>
-                    <%= image_tag event_activity.icon.url(:thumb), :title=>event_activity.name, :alt=>event_activity.name %>
+                    <%= image_tag event_activity.icon.url(:thumb), :title=>event_activity.name, :alt=>event_activity.name, :class=>"tooltipper", :data => { :tooltip => event_activity.name } %>
                 <% end %>
                 <% if event.other_games %>
-                    <%= image_tag "/img/event_icons/star.png", :title=>"Other", :alt=>"Other" %>
+                    <%= image_tag "/img/event_icons/star.png", :title=>"Other", :alt=>"Other", :class=>"tooltipper", :data => { :tooltip => "Other" } %>
                 <% end %>
 
 
 
                 <!-- <span class="square-label">Event Types:</span> -->
                 <% event.eventTypeObjects.each do |event_type| %>
-                    <%= image_tag event_type.icon.url(:thumb), :title=>event_type.name, :alt=>event_type.name %>
+                    <%= image_tag event_type.icon.url(:thumb), :title=>event_type.name, :alt=>event_type.name, :class=>"tooltipper", :data => { :tooltip => event_type.name } %>
                 <% end %>
                 <% if event.other_types %>
-                    <%= image_tag "/img/event_icons/star.png", :title=>"Other", :alt=>"Other" %>
+                    <%= image_tag "/img/event_icons/star.png", :title=>"Other", :alt=>"Other", :class=>"tooltipper", :data => { :tooltip => "Other" } %>
                 <% end %>
             </div>
 

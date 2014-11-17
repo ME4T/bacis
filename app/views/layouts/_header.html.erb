@@ -60,7 +60,7 @@
                           <% end %>
 
                           <li>
-                            <%= link_to "Profile", '/users/' + current_user.id.to_s %>
+                            <%= link_to current_user.username, '/users/' + current_user.id.to_s %>
                           </li>
 
 

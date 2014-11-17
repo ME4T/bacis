@@ -12,7 +12,11 @@ class Event < ActiveRecord::Base
 
   belongs_to :user
   
-  validates :title, :maker, :dayof, :description, :presence => true
+  validates :title, :maker, :description, :presence => true
+
+  validates_presence_of :dayof, :end_date
+  validate :end_date_is_after_start_date
+
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   geocoded_by :address 
@@ -20,13 +24,14 @@ class Event < ActiveRecord::Base
 
 
   filterrific(
-    default_settings: { sorted_by: 'dayof_asc' },
+    default_settings: { sorted_by: 'dayof_asc', ends_after_yesterday: 'anything' },
     filter_names: [
       :search_query,
       :with_game_id,
       :with_event_type_id,
       :with_user_id,
-      :sorted_by
+      :sorted_by,
+      :ends_after_yesterday
     ]
   )
 
@@ -51,6 +56,11 @@ class Event < ActiveRecord::Base
   scope :with_user_id, lambda { |query|
     where("user_id = ?", query) 
   }
+  scope :ends_after_yesterday, lambda{ |query| 
+    where("end_date >= ?", Date.today)
+  }
+
+
    scope :sorted_by, lambda { |sort_option|
     direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
 
@@ -84,4 +94,21 @@ class Event < ActiveRecord::Base
     end
 
 
+
+
+
+
+  def end_date_is_after_start_date
+    return if end_date.blank? || dayof.blank?
+
+    if end_date < dayof
+      errors.add(:end_date, "cannot be before the start date") 
+    end 
+  end
+
 end
+
+
+
+
+

@@ -32,17 +32,26 @@ class StaticPagesController < ApplicationController
                 name:     event.title,
                 location: event.address,
                 website: event.website,
-                time: (event.dayof-Date.today+7),
-                cat: event.cat,
+                types: event.eventTypeObjects,
                 date: event.dayof.month.to_s+'/'+event.dayof.day.to_s+'/'+event.dayof.year.to_s
               })
          if event.website ==nil
            event.website=' '
          end
 
+         types_html = ""
+         for type in event.eventTypeObjects
+          types_html += "<img src = \"" + type.icon.url(:thumb) + "\" class=\"icon tooltipper\" data-tooltip=\"" + type.name + "\" />"
+         end
 
-
-          infowindow_html = "<div class=\"info-window\">" + "<h1><a href=\"/events/" + event.id.to_s + "\">"+event.title+"</a></h1>" + "<p>" + event.dayof.month.to_s+"/"+event.dayof.day.to_s+"/"+event.dayof.year.to_s+"</p>" + "</div>"
+          infowindow_html = 
+            "<div class=\"info-window\">" + 
+            "<h1><a href=\"/events/" + event.id.to_s + "\">"+event.title+"</a></h1>" +
+            "<p>" + event.dayof.month.to_s+"/"+event.dayof.day.to_s+"/"+event.dayof.year.to_s+" - " + 
+            event.end_date.month.to_s+"/"+event.end_date.day.to_s+"/"+event.end_date.year.to_s+"</p>" + 
+            "<div>" + types_html + "</div>" +
+            "<a href=\"/events/" + event.id.to_s + "\" class=\"more-info\">More Info</a>" +
+            "</div>"
 
           marker.infowindow (
             infowindow_html
@@ -50,15 +59,12 @@ class StaticPagesController < ApplicationController
              
 
               #Determine which image to use for the gmaps markers
-             if event.cat =='view'
-               url='/img/common/marker_red.png'
-             elsif event.cat =='tournament'
-               url='/img/common/marker_green.png'
-             
-             elsif event.cat =='con/pax'
+              if event.dayof < Date.today+7;
+                url='/img/common/marker_red.png'
+              elsif event.dayof < Date.today+30;
+                url='/img/common/marker_green.png'
+              else
                url='/img/common/marker_blue.png'
-             else
-               url='/img/common/marker_purple.png'
              end
              
            marker.picture({  
