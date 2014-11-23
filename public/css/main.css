@@ -103,7 +103,11 @@ border-radius: 5px;
 }
 
 
-
+.alert{
+	background:rgba(255,255,255,.1);
+	border:none;
+	box-shadow: none;
+}
 
 
 

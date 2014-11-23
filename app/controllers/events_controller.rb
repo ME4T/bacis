@@ -38,26 +38,32 @@ class EventsController < ApplicationController
  
   def create 
     @event = Event.new(params[:event])
-    if @event.website.to_s.include? "http" || @event.website.to_s == ""
-      #do nothing
-    else
-      @event.website = "http://" + @event.website.to_s
-    end
     @event_activities = EventActivity.all
     @event_types = EventType.all
-    @event.user_id = current_user.id
 
-    respond_to do |format|
-      if @event.save
-        Notifier.send_new_event_notification(@event)
 
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render json: @event, status: :created, location: @event }
-        
-      else
-        format.html { render action: "new" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+
+    if verify_recaptcha
+
+
+      @event.user_id = current_user.id
+
+      respond_to do |format|
+        if @event.save
+          Notifier.send_new_event_notification(@event)
+
+          format.html { redirect_to @event, notice: 'Event was successfully created.' }
+          format.json { render json: @event, status: :created, location: @event }
+          
+        else
+          format.html { render action: "new" }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       end
+    else
+        flash.now[:alert] = "There was an error with the recaptcha code below. Please re-enter the code."      
+        flash.delete :recaptcha_error
+        render :new
     end
   end
 

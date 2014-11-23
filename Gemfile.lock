@@ -214,6 +214,7 @@ GEM
     rake (10.3.2)
     rdoc (3.12.2)
       json (~> 1.4)
+    recaptcha (0.3.6)
     responders (1.1.1)
       railties (>= 3.2, < 4.2)
     rspec (2.11.0)
@@ -299,6 +300,7 @@ DEPENDENCIES
   paperclip
   rails (= 3.2.8)
   rails_12factor
+  recaptcha
   rspec-rails (= 2.11.0)
   sass (= 3.2.15)
   sass-rails (= 3.2.5)
