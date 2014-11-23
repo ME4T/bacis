@@ -1,8 +1,16 @@
-
+<% content_for :title, @event.title %>
 
 
 <div class="container event-details top hero-unit">
     <div class="row">
+
+
+
+
+
+
+
+
 
 
 	    <section class="col-md-12">
@@ -80,7 +88,7 @@
 <div class="container event-details black-box">
 
 	<div class="row ">
-		<div class="col-md-9 ">
+		<div class="col-md-8 ">
 
 			<div class="content row">
 
@@ -118,7 +126,7 @@
 
 
 
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div class="content side-bar">
 
 				<h4>Share</h4>
@@ -145,6 +153,32 @@
 	                	</span>
 	                </li>
                 </ul>
+
+
+                <% if @tweet_news %>
+            	<div class="twitter-feed">
+        			<h4>Twitter Feed</h4>
+        			<div class="tweets">
+						<% @tweet_news.each do |tweet| %>
+						    <div class="row <%=cycle('odd', '')%>">
+						    	<div class="the-tweet">
+						        <%= link_to image_tag(tweet.user.profile_image_uri), tweet.user.url.to_s, :class => "username col-md-2", :target => "_blank" %>  
+						        <div class="tweet_text_area col-md-10">
+						            <div class="tweet_text">
+							            <%=raw display_content_with_links(tweet.text) %>
+						            </div>
+						            <div class="tweet_created_at">
+						                <%= time_ago_in_words tweet.created_at %> ago
+						            </div>
+						        </div>
+						        </div>
+						    </div>
+						<% end %>
+					</div>
+
+				</div>
+				<% end %>
+
 
 
 				<% if @event.website.to_s != "" %>

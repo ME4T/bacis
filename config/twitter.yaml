@@ -1,0 +1,12 @@
+# config/twitter.yaml
+development: &base
+  key: "foo"
+  secret: "bar"
+
+test:
+ <<: *base
+ key: "foo2"
+
+production:
+  <<: *base
+  secret: "barbar"

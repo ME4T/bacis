@@ -89,7 +89,28 @@ class EventsController < ApplicationController
   end
 
 
+
+
+
   def show
+    twitter_client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = TwitterConfig.config[:consumer_key]
+        config.consumer_secret     = TwitterConfig.config[:consumer_secret]
+        config.access_token        = TwitterConfig.config[:access_token]
+        config.access_token_secret = TwitterConfig.config[:access_token_secret]
+      end
+
+      def twitter_client.get_all_tweets(user)
+        options = {:count => 3, :include_rts => true}
+          user_timeline(user, options)
+      end
+
+    begin
+      @tweet_news = twitter_client.get_all_tweets("Gateway_Gamer")
+    rescue
+
+    end
+
     @event=Event.find(params[:id])
     if(@event.event_activities)
       @event_activities = EventActivity.find(@event.event_activities)

@@ -13,11 +13,11 @@
 
 
 
-        <meta property="og:title" content="Gateway Gamer" />
+        <meta property="og:title" content="<%= full_title(yield(:title)) %>" />
         <meta property="og:type" content="Sharing Widgets" />
-        <meta property="og:url" content="http://www.gatewaygamer.com" />
+        <meta property="og:url" content="<%= url_for(:only_path => false) %>" />
         <meta property="og:image" content="http://www.gatewaygamer.com/img/common/blue_logo_with_words.png" />
-        <meta property="og:description" content="Sharing is great!" />
+        <meta property="og:description" content="Gateway Gamer: Your resource dedicated to the growth of esports" />
         <meta property="og:site_name" content="Gateway Gamer" />
 
 
