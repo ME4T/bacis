@@ -5,7 +5,6 @@
 	  
 		<% flash.each do |name, msg| %>
              <div class="row">
-                 <div class="col-md-2"><p>&nbsp;</p></div>
                 <%= content_tag :div, msg, id: "flash_#{name}", class: "#{name} col-md-6" %>
              </div>
         <% end %>
