@@ -1,12 +1,16 @@
 <div class="container box sign-up registration">
-  <div class="row">
 
+
+    <div class="row">
+      <% flash.each do |name, msg| %>
+              <%= content_tag :div, msg, id: "flash_#{name}", class: "alert col-md-6" %>
+          <% end %>
+    </div>
+    
+  <div class="row">
 
     <section class="col-lg-6 hero-unit">
 
-        <% flash.each do |name, msg| %>
-            <%= content_tag :div, msg, id: "flash_#{name}", class: "#{name}" %>
-        <% end %>
 
         <h1 class="">Sign up</h1>
       
