@@ -1,16 +1,38 @@
 <div class="container hero-unit" id="map-container">
     <div class="row">
+
+    </div>
+
+    <div class="row">
         <div class="col-md-12">
             <div id="the_map"></div>
             <%= link_to("Create an Event", "/events/new", :class=>"new-event btn-primary") %>
+
+
+
+            <div class="legend">
+                <div class="legend-item">
+                    <img src="/img/common/marker_red.png">
+                    Next 7 Days
+                </div>
+                <div class="legend-item">
+                    <img src="/img/common/marker_green.png">
+                    Next 30 Days
+                </div>
+                <div class="legend-item">
+                    <img src="/img/common/marker_blue.png">
+                    Later
+                </div>
+            </div>
+
+
         </div>
+
+
     </div>
 
 
 </div>
-
-
-
 
 
 
