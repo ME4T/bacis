@@ -3,7 +3,13 @@
 
 
 	  
-
+		<% flash.each do |name, msg| %>
+             <div class="row">
+                 <div class="col-md-2"><p>&nbsp;</p></div>
+                <%= content_tag :div, msg, id: "flash_#{name}", class: "#{name} col-md-6" %>
+             </div>
+        <% end %>
+        
 		<section class="col-lg-6 box hero-unit sign-in">
 			<h1 class="">Sign in</h1>
 			<p>Don't have an account? <a href="/users/sign_up">Register Here!</a></p>
