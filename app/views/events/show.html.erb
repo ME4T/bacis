@@ -20,6 +20,7 @@
 
 
 
+
 	    <section class="col-md-6 title">
 
 
@@ -38,6 +39,9 @@
 
 
 	    </section>
+
+
+
 	    <section class="col-md-6">
 
 
@@ -84,6 +88,31 @@
 	</div>
 
 </div>
+
+        <% if @tweet_news %>
+        <div class="container tweet-wrapper ">
+        	<div class="row">
+			    <div class="col-md-12">
+				    <div class="marquee">
+				    	<div class="tweets">
+					    	<% @tweet_news.each do |tweet| %>
+						    	<div class="the-tweet">
+						    		&bull;
+						    		<!-- image_tag(tweet.user.profile_image_uri) -->
+
+							        <%= link_to tweet.user.name + ": ", tweet.user.url.to_s, :class => "user_image", :target => "_blank" %>  
+							        <%= time_ago_in_words(tweet.created_at) + " - " %>
+							        <%=raw display_content_with_links(tweet.text) %>
+							        
+						        </div>
+							<% end %>
+						</div>
+					</div>
+			    </div>
+		    </div>
+	    </div>
+	    <br />
+		<% end %>
 
 <div class="container event-details black-box">
 
@@ -155,29 +184,7 @@
                 </ul>
 
 
-                <% if @tweet_news %>
-            	<div class="twitter-feed">
-        			<h4>Twitter Feed</h4>
-        			<div class="tweets">
-						<% @tweet_news.each do |tweet| %>
-						    <div class="row <%=cycle('odd', '')%>">
-						    	<div class="the-tweet">
-						        <%= link_to image_tag(tweet.user.profile_image_uri), tweet.user.url.to_s, :class => "username col-md-2", :target => "_blank" %>  
-						        <div class="tweet_text_area col-md-10">
-						            <div class="tweet_text">
-							            <%=raw display_content_with_links(tweet.text) %>
-						            </div>
-						            <div class="tweet_created_at">
-						                <%= time_ago_in_words tweet.created_at %> ago
-						            </div>
-						        </div>
-						        </div>
-						    </div>
-						<% end %>
-					</div>
 
-				</div>
-				<% end %>
 
 
 

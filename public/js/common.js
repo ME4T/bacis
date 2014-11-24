@@ -14,4 +14,11 @@ $(document).ready(function(){
 	        classes: 'qtip-youtube'
 	    }
 	});
+
+
+	$(".marquee").marquee({
+		duration: 20000
+	});
+
+
 });

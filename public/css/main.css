@@ -324,20 +324,26 @@ transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 
 
 
-
+.tweet-wrapper{
+	overflow:hidden;
+	background-color:rgba(0,0,0,.7);
+	padding-top:10px;
+	padding-bottom:10px;
+	
+}
 .tweets{
 	font-weight:normal;
-	margin-bottom:10px;
 	overflow:hidden;
 }
 .event-details .twitter-feed h4{
 	border-bottom:0px;
 	padding-bottom:0;
 }
-.twitter-feed .the-tweet{
-	border-top:solid 1px #CCC;
+.tweets .the-tweet{
 	padding:5px;
 	overflow:hidden;
+	float:left;
+	display:block;
 }
 
 .new_filterrific input{

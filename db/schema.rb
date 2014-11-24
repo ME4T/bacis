@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141109183038) do
+ActiveRecord::Schema.define(:version => 20141124001443) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20141109183038) do
     t.string   "twitter_url"
     t.boolean  "other_games"
     t.boolean  "other_types"
+    t.string   "twitter_search"
   end
 
   create_table "friends", :force => true do |t|
